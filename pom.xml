@@ -202,14 +202,6 @@
                     <!-- Use test scope because the UI/demo classes are in
                             the test package. -->
                     <useTestScope>true</useTestScope>
-                    <webAppConfig>
-                    <!-- 
-                        <resourceBases>
-	                        <resourceBase>src/test/resources/META-INF/resources</resourceBase>
-	                        <resourceBase>src/main/resources/META-INF/resources</resourceBase>
-	                    </resourceBases>
-	                 -->
-                    </webAppConfig>
                     <supportedPackagings>
                         <supportedPackaging>jar</supportedPackaging>
                     </supportedPackagings>
