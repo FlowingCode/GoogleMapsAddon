@@ -21,6 +21,9 @@ import com.vaadin.flow.shared.Registration;
 @NpmPackage(value = "@flowingcode/google-map", version = "3.0.0")
 public class GoogleMapPolygon extends Component {
 
+	private static final double DEFAULT_FILL_OPACITY = 0.5d;
+	private static final String DEFAULT_FILL_COLOR = "blue";
+
 	public enum StrokePosition {
 		CENTER, INSIDE, OUTSIDE
 	}
@@ -28,8 +31,8 @@ public class GoogleMapPolygon extends Component {
 	public GoogleMapPolygon(List<GoogleMapPoint> points) {
 		getElement().removeProperty("draggable");
 		setClosed(true);
-		setFillColor("blue");
-		setFillOpacity(0.5d);
+		setFillColor(DEFAULT_FILL_COLOR);
+		setFillOpacity(DEFAULT_FILL_OPACITY);
 		setPoints(points);
 	}
 
@@ -105,7 +108,7 @@ public class GoogleMapPolygon extends Component {
 		return this.getElement().getProperty("geodesic", false);
 	}
 
-	public void setPoints(List<GoogleMapPoint> points) {
+	public void setPoints(Iterable<GoogleMapPoint> points) {
 		points.forEach(point -> this.getElement().appendChild(point.getElement()));
 	}
 
@@ -119,6 +122,7 @@ public class GoogleMapPolygon extends Component {
 		this.getElement().appendChild(point.getElement());
 	}
 
+    @SuppressWarnings("squid:S3242")
 	public void removePoint(GoogleMapPoint point) {
 		this.getElement().removeChild(point.getElement());
 	}

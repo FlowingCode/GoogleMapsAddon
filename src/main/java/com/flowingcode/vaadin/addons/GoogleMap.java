@@ -125,6 +125,7 @@ public class GoogleMap extends Component implements HasSize {
 		this.getElement().appendChild(polygon.getElement());
     }
     
+    @SuppressWarnings("squid:S3242")
     public void removePolygon(GoogleMapPolygon polygon) {
     	this.getElement().removeChild(polygon.getElement());
     }
@@ -138,6 +139,7 @@ public class GoogleMap extends Component implements HasSize {
 		this.getElement().appendChild(marker.getElement());
     }
     
+    @SuppressWarnings("squid:S3242")
     public void removeMarker(GoogleMapMarker marker) {
     	this.getElement().removeChild(marker.getElement());
     }
