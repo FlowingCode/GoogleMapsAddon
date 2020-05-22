@@ -4,3 +4,6 @@
 /package.json
 /package-lock.json
 /webpack.config.js
+/.settings
+/.classpath
+/.project
