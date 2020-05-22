@@ -16,9 +16,9 @@ import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
 @Route("")
-public class View extends VerticalLayout {
+public class DemoView extends VerticalLayout {
 
-    public View() {
+    public DemoView() {
     	this.setSizeFull();
     	String apiKey = System.getProperty("google.maps.api");
     	if (apiKey==null) {
