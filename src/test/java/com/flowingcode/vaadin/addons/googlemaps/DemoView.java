@@ -46,11 +46,13 @@ public class DemoView extends VerticalLayout {
             GoogleMap gmaps = new GoogleMap(apiKey,null,null);
             gmaps.setMapType(MapType.SATELLITE);
             gmaps.setSizeFull();
-            gmaps.setCenter(new LatLon(0,0));
-            gmaps.addMarker("Center", new LatLon(0,0), true, "");
-            GoogleMapPolygon gmp = gmaps.addPolygon(Arrays.asList(new GoogleMapPoint(gmaps.getCenter()),
-    		new GoogleMapPoint(gmaps.getCenter().getLat(),gmaps.getCenter().getLon()+1),
-    		new GoogleMapPoint(gmaps.getCenter().getLat()+1,gmaps.getCenter().getLon())));
+            gmaps.setCenter(new LatLon(-31.636036,-60.7055271));
+            gmaps.addMarker("Center", new LatLon(-31.636036,-60.7055271), true, "https://www.flowingcode.com/wp-content/uploads/2020/06/FCMarker.png");
+            GoogleMapPolygon gmp = gmaps.addPolygon(Arrays.asList(
+	    		new GoogleMapPoint(gmaps.getCenter().getLat(),gmaps.getCenter().getLon()+1),
+	    		new GoogleMapPoint(gmaps.getCenter().getLat()+1,gmaps.getCenter().getLon()),
+	    		new GoogleMapPoint(gmaps.getCenter().getLat(),gmaps.getCenter().getLon()-1),
+	    		new GoogleMapPoint(gmaps.getCenter().getLat()-1,gmaps.getCenter().getLon())));
             gmp.addClickListener(ev->Notification.show("polygon clicked"));
             Button center = new Button("Show Coordinates", ev-> {
             	Notification.show("Center coordinates: " + gmaps.getCenter());
