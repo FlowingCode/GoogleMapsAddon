@@ -66,15 +66,15 @@ public class GoogleMap extends Component implements HasSize {
 			this.getElement().setAttribute("language", language);
 		}
 	}
-	
-	
+
 	@Synchronize("google-map-idle")
 	public Double getLatitude() {
-		return this.getElement().getProperty("latitude",0d);
+		return this.getElement().getProperty("latitude", 0d);
 	}
+
 	@Synchronize("google-map-idle")
 	public Double getLongitude() {
-		return this.getElement().getProperty("longitude",0d);
+		return this.getElement().getProperty("longitude", 0d);
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class GoogleMap extends Component implements HasSize {
 		this.getElement().setProperty("latitude", center.getLat());
 		this.getElement().setProperty("longitude", center.getLon());
 	}
-	
+
 	/**
 	 * Returns the current position of the center of the map.
 	 *
@@ -115,7 +115,7 @@ public class GoogleMap extends Component implements HasSize {
 	 */
 	@Synchronize("google-map-idle")
 	public int getZoom() {
-		return this.getElement().getProperty("zoom",0);
+		return this.getElement().getProperty("zoom", 0);
 	}
 
 	/**
@@ -129,114 +129,111 @@ public class GoogleMap extends Component implements HasSize {
 	 */
 	public GoogleMapMarker addMarker(String caption, LatLon position, boolean draggable, String iconUrl) {
 		GoogleMapMarker gmm = new GoogleMapMarker(caption, position, draggable, iconUrl);
-		this.getElement().appendChild(gmm.getElement());
-		if (this.getElement().getParent()!=null) this.getElement().executeJs("this._updateMarkers()");
+		addMarker(gmm);
 		return gmm;
 	}
-	
+
 	public GoogleMapPolygon addPolygon(List<GoogleMapPoint> points) {
 		GoogleMapPolygon polygon = new GoogleMapPolygon(points);
 		this.getElement().appendChild(polygon.getElement());
 		return polygon;
 	}
 
-    public void addPolygon(GoogleMapPolygon polygon) {
+	public void addPolygon(GoogleMapPolygon polygon) {
 		this.getElement().appendChild(polygon.getElement());
-    }
-    
-    @SuppressWarnings("squid:S3242")
-    public void removePolygon(GoogleMapPolygon polygon) {
-    	this.getElement().removeChild(polygon.getElement());
-    }
+	}
 
-    /**
-     * Adds a marker to the map.
-     *
-     * @param marker The marker to add.
-     */
-    public void addMarker(GoogleMapMarker marker) {
+	@SuppressWarnings("squid:S3242")
+	public void removePolygon(GoogleMapPolygon polygon) {
+		this.getElement().removeChild(polygon.getElement());
+	}
+
+	/**
+	 * Adds a marker to the map.
+	 *
+	 * @param marker The marker to add.
+	 */
+	public void addMarker(GoogleMapMarker marker) {
 		this.getElement().appendChild(marker.getElement());
-    }
-    
-    @SuppressWarnings("squid:S3242")
-    public void removeMarker(GoogleMapMarker marker) {
-    	this.getElement().removeChild(marker.getElement());
-    }
+		if (this.getElement().getParent() != null)
+			this.getElement().executeJs("this._updateMarkers()");
+	}
 
-    /**
-     * Sets the type of the base map.
-     *
-     * @param type The new MapType to use.
-     */
-    public void setMapType(MapType type) {
-    	this.getElement().setProperty("mapType", type.name().toLowerCase());
-    }
+	@SuppressWarnings("squid:S3242")
+	public void removeMarker(GoogleMapMarker marker) {
+		this.getElement().removeChild(marker.getElement());
+	}
 
-    /**
-     * Returns the current type of the base map.
-     *
-     * @return The current MapType.
-     */
-    public MapType getMapType() {
-    	return MapType.valueOf(this.getElement().getProperty("mapType").toUpperCase());
-    }
+	/**
+	 * Sets the type of the base map.
+	 *
+	 * @param type The new MapType to use.
+	 */
+	public void setMapType(MapType type) {
+		this.getElement().setProperty("mapType", type.name().toLowerCase());
+	}
 
-    /**
-     * Checks if the map is currently draggable.
-     *
-     * @return true, if the map draggable.
-     */
-    public boolean isDraggable() {
-    	return this.getElement().getProperty("draggable", true);
-    }
+	/**
+	 * Returns the current type of the base map.
+	 *
+	 * @return The current MapType.
+	 */
+	public MapType getMapType() {
+		return MapType.valueOf(this.getElement().getProperty("mapType").toUpperCase());
+	}
 
-    /**
-     * Enables/disables dragging of the map.
-     *
-     * @param draggable Set to true to enable dragging.
-     */
-    public void setDraggable(boolean draggable) {
-    	this.getElement().setProperty("draggable", draggable);
-    }
+	/**
+	 * Checks if the map is currently draggable.
+	 *
+	 * @return true, if the map draggable.
+	 */
+	public boolean isDraggable() {
+		return this.getElement().getProperty("draggable", true);
+	}
 
-    /**
-     * Sets the maximum allowed amount of zoom (default 21.0).
-     *
-     * @param maxZoom The maximum amount for zoom.
-     */
-    public void setMaxZoom(int maxZoom) {
-    	this.getElement().setProperty("maxZoom", maxZoom);
-    }
+	/**
+	 * Enables/disables dragging of the map.
+	 *
+	 * @param draggable Set to true to enable dragging.
+	 */
+	public void setDraggable(boolean draggable) {
+		this.getElement().setProperty("draggable", draggable);
+	}
 
-    /**
-     * Returns the current maximum amount of zoom.
-     *
-     * @return maximum amount of zoom
-     */
-    public int getMaxZoom() {
-    	return this.getElement().getProperty("maxZoom", 1);
-    }
+	/**
+	 * Sets the maximum allowed amount of zoom (default 21.0).
+	 *
+	 * @param maxZoom The maximum amount for zoom.
+	 */
+	public void setMaxZoom(int maxZoom) {
+		this.getElement().setProperty("maxZoom", maxZoom);
+	}
 
-    /**
-     * Sets the minimum allowed amount of zoom (default 0.0).
-     *
-     * @param minZoom The minimum amount for zoom.
-     */
-    public void setMinZoom(int minZoom) {
-    	this.getElement().setProperty("minZoom", minZoom);
-    }
+	/**
+	 * Returns the current maximum amount of zoom.
+	 *
+	 * @return maximum amount of zoom
+	 */
+	public int getMaxZoom() {
+		return this.getElement().getProperty("maxZoom", 1);
+	}
 
-    /**
-     * Returns the current minimum amount of zoom.
-     *
-     * @return minimum amount of zoom
-     */
-    public int getMinZoom() {
-    	return this.getElement().getProperty("minZoom", 1);
-    }
-    
-    
-    
+	/**
+	 * Sets the minimum allowed amount of zoom (default 0.0).
+	 *
+	 * @param minZoom The minimum amount for zoom.
+	 */
+	public void setMinZoom(int minZoom) {
+		this.getElement().setProperty("minZoom", minZoom);
+	}
 
+	/**
+	 * Returns the current minimum amount of zoom.
+	 *
+	 * @return minimum amount of zoom
+	 */
+	public int getMinZoom() {
+		return this.getElement().getProperty("minZoom", 1);
+	}
 
 }
