@@ -19,7 +19,9 @@
  */
 package com.flowingcode.vaadin.addons.googlemaps;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
@@ -157,6 +159,12 @@ public class GoogleMapPolygon extends Component {
 		this.getElement().setProperty("clickable", true);
 		this.getElement().setProperty("clickEvents", true);
 		return addListener(GoogleMapPolygonClickEvent.class, listener);
+	}
+
+	public void setIcons(Icon... icons) {
+		String iconsStr = "["
+				+ Arrays.asList(icons).stream().map(Icon::getJson).collect(Collectors.joining(",")) + "]";
+		getElement().executeJs("this.icons=" + iconsStr);
 	}
 
 }

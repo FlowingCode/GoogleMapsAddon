@@ -21,10 +21,6 @@ package com.flowingcode.vaadin.addons.googlemaps;
 
 import java.util.Arrays;
 
-import com.flowingcode.vaadin.addons.googlemaps.GoogleMap;
-import com.flowingcode.vaadin.addons.googlemaps.GoogleMapPoint;
-import com.flowingcode.vaadin.addons.googlemaps.GoogleMapPolygon;
-import com.flowingcode.vaadin.addons.googlemaps.LatLon;
 import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
@@ -52,7 +48,10 @@ public class DemoView extends VerticalLayout {
 	    		new GoogleMapPoint(gmaps.getCenter().getLat(),gmaps.getCenter().getLon()+1),
 	    		new GoogleMapPoint(gmaps.getCenter().getLat()+1,gmaps.getCenter().getLon()),
 	    		new GoogleMapPoint(gmaps.getCenter().getLat(),gmaps.getCenter().getLon()-1),
-	    		new GoogleMapPoint(gmaps.getCenter().getLat()-1,gmaps.getCenter().getLon())));
+					new GoogleMapPoint(gmaps.getCenter().getLat() - 1, gmaps.getCenter().getLon()),
+					new GoogleMapPoint(gmaps.getCenter().getLat(), gmaps.getCenter().getLon() + 1)));
+			gmp.setClosed(false);
+			gmp.setIcons(new Icon("M -2,0 0,-2 2,0 0,2 z", "#F00", "#FF0", 1, 25));
             gmp.addClickListener(ev->Notification.show("polygon clicked"));
             Button center = new Button("Show Coordinates", ev-> {
             	Notification.show("Center coordinates: " + gmaps.getCenter());
