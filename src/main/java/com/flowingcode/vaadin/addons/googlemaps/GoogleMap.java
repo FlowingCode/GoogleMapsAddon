@@ -33,7 +33,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @SuppressWarnings("serial")
 @Tag("google-map")
 @JsModule("@flowingcode/google-map/google-map.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.0.0")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.0.1")
 public class GoogleMap extends Component implements HasSize {
 
 	/**

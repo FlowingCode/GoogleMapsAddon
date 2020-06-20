@@ -20,6 +20,7 @@
 package com.flowingcode.vaadin.addons.googlemaps;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Synchronize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
@@ -30,7 +31,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @SuppressWarnings("serial")
 @Tag("google-map-marker")
 @JsModule("@flowingcode/google-map/google-map-marker.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.0.0")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.0.1")
 public class GoogleMapMarker extends Component {
 
     private static long idCounter = 0;
@@ -92,6 +93,20 @@ public class GoogleMapMarker extends Component {
 		this.getElement().setAttribute("longitude", ""+position.getLon());
 		this.getElement().setAttribute("draggable", draggable);
 		this.getElement().setAttribute("icon", iconUrl);
+	}
+
+	public void addInfoWindow(String htmlContent) {
+		getElement().executeJs("this.innerHTML = $0", htmlContent);
+	}
+
+	@Synchronize(value = { "google-map-marker-open", "google-map-marker-close" }, property = "open")
+	public boolean isInfoWindowVisible() {
+		return this.getElement().getProperty("open", false);
+	}
+
+	public void setInfoWindowVisible(boolean visible) {
+		getElement().executeJs("this.open = $0", visible);
+		getElement().executeJs("this._openChanged()");
 	}
 
 	/**

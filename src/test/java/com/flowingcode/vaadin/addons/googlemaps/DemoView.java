@@ -43,7 +43,9 @@ public class DemoView extends VerticalLayout {
             gmaps.setMapType(MapType.SATELLITE);
             gmaps.setSizeFull();
             gmaps.setCenter(new LatLon(-31.636036,-60.7055271));
-            gmaps.addMarker("Center", new LatLon(-31.636036,-60.7055271), true, "https://www.flowingcode.com/wp-content/uploads/2020/06/FCMarker.png");
+			GoogleMapMarker flowingmarker = gmaps.addMarker("Center", new LatLon(-31.636036, -60.7055271), true,
+					"https://www.flowingcode.com/wp-content/uploads/2020/06/FCMarker.png");
+			flowingmarker.addInfoWindow("<h1>Flowing Code</h1>");
             GoogleMapPolygon gmp = gmaps.addPolygon(Arrays.asList(
 	    		new GoogleMapPoint(gmaps.getCenter().getLat(),gmaps.getCenter().getLon()+1),
 	    		new GoogleMapPoint(gmaps.getCenter().getLat()+1,gmaps.getCenter().getLon()),
@@ -64,7 +66,10 @@ public class DemoView extends VerticalLayout {
             			new GoogleMapPoint(gmaps.getCenter().getLat(),gmaps.getCenter().getLon()+1),
             			new GoogleMapPoint(gmaps.getCenter().getLat()+1,gmaps.getCenter().getLon())));
             });
-            add(gmaps, new HorizontalLayout(center, addMarker, addPoint));
+			Button toggleInfoWindow = new Button("Toggle Info Window", ev -> {
+				flowingmarker.setInfoWindowVisible(!flowingmarker.isInfoWindowVisible());
+			});
+			add(gmaps, new HorizontalLayout(center, addMarker, addPoint, toggleInfoWindow));
     	}
 
     }
