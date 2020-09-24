@@ -22,12 +22,16 @@ package com.flowingcode.vaadin.addons.googlemaps;
 import com.flowingcode.vaadin.addons.DemoLayout;
 import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @SuppressWarnings("serial")
 @Route(value = "googlemaps", layout = DemoLayout.class)
@@ -59,8 +63,21 @@ public class GooglemapsDemoView extends VerticalLayout {
 			Button center = new Button("Show Coordinates", ev -> {
 				Notification.show("Center coordinates: " + gmaps.getCenter());
 			});
+			Map<String, String> map = new HashMap<>();
+			map.put("Red", Markers.RED);
+			map.put("Pink", Markers.PINK);
+			map.put("Blue", Markers.BLUE);
+			map.put("Green", Markers.GREEN);
+			map.put("Purple", Markers.PURPLE);
+			map.put("Yellow", Markers.YELLOW);
+			map.put("Orange", Markers.ORANGE);
+			map.put("Light blue", Markers.LIGHTBLUE);
+			ComboBox<String> colorCB = new ComboBox<>();
+			colorCB.setItems(map.keySet());
+			colorCB.setPlaceholder("Marker color");
 			Button addMarker = new Button("Add Marker", ev -> {
-				gmaps.addMarker("New Marker", gmaps.getCenter(), true, "");
+				String markerColor = Optional.ofNullable(map.get(colorCB.getValue())).orElse("");
+				gmaps.addMarker("New Marker", gmaps.getCenter(), true, markerColor);
 			});
 			Button addPoint = new Button("Add Polygon", ev -> {
 				gmaps.addPolygon(Arrays.asList(new GoogleMapPoint(gmaps.getCenter()),
@@ -70,7 +87,7 @@ public class GooglemapsDemoView extends VerticalLayout {
 			Button toggleInfoWindow = new Button("Toggle Info Window", ev -> {
 				flowingmarker.setInfoWindowVisible(!flowingmarker.isInfoWindowVisible());
 			});
-			add(gmaps, new HorizontalLayout(center, addMarker, addPoint, toggleInfoWindow));
+			add(gmaps, new HorizontalLayout(center, addMarker, colorCB, addPoint, toggleInfoWindow));
 		}
 
 	}
