@@ -20,75 +20,21 @@
 package com.flowingcode.vaadin.addons.googlemaps;
 
 import com.flowingcode.vaadin.addons.DemoLayout;
-import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.flowingcode.vaadin.addons.demo.impl.TabbedDemoImpl;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 @SuppressWarnings("serial")
 @Route(value = "googlemaps", layout = DemoLayout.class)
 public class GooglemapsDemoView extends VerticalLayout {
 
-	public GooglemapsDemoView() {
-		this.setSizeFull();
-		String apiKey = System.getProperty("google.maps.api");
-		if (apiKey == null) {
-			add(new H2(
-					"Api key is needded to run the demo, pass it using the following system property: '-Dgoogle.maps.api=<your-api-key>'"));
-		} else {
-			GoogleMap gmaps = new GoogleMap(apiKey, null, null);
-			gmaps.setMapType(MapType.SATELLITE);
-			gmaps.setSizeFull();
-			gmaps.setCenter(new LatLon(-31.636036, -60.7055271));
-			GoogleMapMarker flowingmarker = gmaps.addMarker("Center", new LatLon(-31.636036, -60.7055271), true,
-					"https://www.flowingcode.com/wp-content/uploads/2020/06/FCMarker.png");
-			flowingmarker.addInfoWindow("<h1>Flowing Code</h1>");
-			GoogleMapPolygon gmp = gmaps.addPolygon(
-					Arrays.asList(new GoogleMapPoint(gmaps.getCenter().getLat(), gmaps.getCenter().getLon() + 1),
-							new GoogleMapPoint(gmaps.getCenter().getLat() + 1, gmaps.getCenter().getLon()),
-							new GoogleMapPoint(gmaps.getCenter().getLat(), gmaps.getCenter().getLon() - 1),
-							new GoogleMapPoint(gmaps.getCenter().getLat() - 1, gmaps.getCenter().getLon()),
-							new GoogleMapPoint(gmaps.getCenter().getLat(), gmaps.getCenter().getLon() + 1)));
-			gmp.setClosed(false);
-			gmp.setIcons(new Icon("M -2,0 0,-2 2,0 0,2 z", "#F00", "#FF0", 1, 25));
-			gmp.addClickListener(ev -> Notification.show("polygon clicked"));
-			Button center = new Button("Show Coordinates", ev -> {
-				Notification.show("Center coordinates: " + gmaps.getCenter());
-			});
-			Map<String, String> map = new HashMap<>();
-			map.put("Red", Markers.RED);
-			map.put("Pink", Markers.PINK);
-			map.put("Blue", Markers.BLUE);
-			map.put("Green", Markers.GREEN);
-			map.put("Purple", Markers.PURPLE);
-			map.put("Yellow", Markers.YELLOW);
-			map.put("Orange", Markers.ORANGE);
-			map.put("Light blue", Markers.LIGHTBLUE);
-			ComboBox<String> colorCB = new ComboBox<>();
-			colorCB.setItems(map.keySet());
-			colorCB.setPlaceholder("Marker color");
-			Button addMarker = new Button("Add Marker", ev -> {
-				String markerColor = Optional.ofNullable(map.get(colorCB.getValue())).orElse("");
-				gmaps.addMarker("New Marker", gmaps.getCenter(), true, markerColor);
-			});
-			Button addPoint = new Button("Add Polygon", ev -> {
-				gmaps.addPolygon(Arrays.asList(new GoogleMapPoint(gmaps.getCenter()),
-						new GoogleMapPoint(gmaps.getCenter().getLat(), gmaps.getCenter().getLon() + 1),
-						new GoogleMapPoint(gmaps.getCenter().getLat() + 1, gmaps.getCenter().getLon())));
-			});
-			Button toggleInfoWindow = new Button("Toggle Info Window", ev -> {
-				flowingmarker.setInfoWindowVisible(!flowingmarker.isInfoWindowVisible());
-			});
-			add(gmaps, new HorizontalLayout(center, addMarker, colorCB, addPoint, toggleInfoWindow));
-		}
+	private static final String GMAPS_DEMO = "Google Maps Demo";
+	private static final String GMAPS_SOURCE = "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/GooglemapsDemoView.java";
 
+	public GooglemapsDemoView() {
+		TabbedDemoImpl<GoogleMapsDemo> mapsDemo = new TabbedDemoImpl<GoogleMapsDemo>(new GoogleMapsDemo(), GMAPS_DEMO,
+				GMAPS_SOURCE);
+		setSizeFull();
+		add(mapsDemo);
 	}
 }
