@@ -125,6 +125,12 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.flowingcode.vaadin.addons.demo</groupId>
+			<artifactId>commons-demo</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
 
     <build>
@@ -205,6 +211,11 @@
                     <supportedPackagings>
                         <supportedPackaging>jar</supportedPackaging>
                     </supportedPackagings>
+                     <webAppConfig>
+                        <resourceBases>
+	                        <resourceBase>src/test/resources/META-INF/resources</resourceBase>
+	                    </resourceBases>
+                    </webAppConfig>
                 </configuration>
             </plugin>
         </plugins>
