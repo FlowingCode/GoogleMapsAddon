@@ -19,6 +19,7 @@
  */
 package com.flowingcode.vaadin.addons.googlemaps;
 
+import com.flowingcode.vaadin.addons.GithubLink;
 import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -35,6 +36,7 @@ import java.util.Optional;
 
 @SuppressWarnings("serial")
 @StyleSheet("context://frontend/styles/google-maps/demo-styles.css")
+@GithubLink("https://github.com/FlowingCode/GoogleMapsAddon")
 public class GoogleMapsDemo extends VerticalLayout {
 
 	public GoogleMapsDemo() {
