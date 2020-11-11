@@ -20,12 +20,14 @@
 package com.flowingcode.vaadin.addons.googlemaps;
 
 import com.flowingcode.vaadin.addons.DemoLayout;
+import com.flowingcode.vaadin.addons.GithubLink;
 import com.flowingcode.vaadin.addons.demo.impl.TabbedDemoImpl;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
 @Route(value = "googlemaps", layout = DemoLayout.class)
+@GithubLink("https://github.com/FlowingCode/GoogleMapsAddon")
 public class GooglemapsDemoView extends VerticalLayout {
 
 	private static final String GMAPS_DEMO = "Google Maps Demo";
