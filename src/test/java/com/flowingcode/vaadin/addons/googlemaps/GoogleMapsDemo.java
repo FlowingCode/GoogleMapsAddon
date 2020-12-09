@@ -28,6 +28,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.data.provider.DataProvider;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -73,7 +74,8 @@ public class GoogleMapsDemo extends VerticalLayout {
 			map.put("Orange", Markers.ORANGE);
 			map.put("Light blue", Markers.LIGHTBLUE);
 			ComboBox<String> colorCB = new ComboBox<>();
-			colorCB.setItems(map.keySet());
+			colorCB.setDataProvider(
+				DataProvider.fromStream(map.keySet().stream()));
 			colorCB.setPlaceholder("Marker color");
 			Button addMarker = new Button("Add Marker", ev -> {
 				String markerColor = Optional.ofNullable(map.get(colorCB.getValue())).orElse("");
