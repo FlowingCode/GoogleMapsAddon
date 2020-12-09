@@ -22,7 +22,6 @@ package com.flowingcode.vaadin.addons.googlemaps;
 import com.flowingcode.vaadin.addons.DemoLayout;
 import com.flowingcode.vaadin.addons.GithubLink;
 import com.flowingcode.vaadin.addons.demo.TabbedDemo;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
@@ -31,7 +30,8 @@ import com.vaadin.flow.router.Route;
 public class GooglemapsDemoView extends TabbedDemo {
 
 	private static final String GMAPS_DEMO = "Google Maps Demo";
-	private static final String GMAPS_SOURCE = "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/GooglemapsDemoView.java";
+	private static final String GMAPS_SOURCE =
+		"https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/GoogleMapsDemo.java";
 
 	public GooglemapsDemoView() {
 		addDemo(new GoogleMapsDemo(), GMAPS_DEMO, GMAPS_SOURCE);
