@@ -49,6 +49,14 @@ public class GoogleMapsDemo extends VerticalLayout {
 			gmaps.setMapType(MapType.SATELLITE);
 			gmaps.setSizeFull();
 			gmaps.setCenter(new LatLon(-31.636036, -60.7055271));
+
+			gmaps.addClickListener(ev -> Notification
+					.show("Left click at latitude: " + ev.getLatitude()
+							+ "; Longitude: " + ev.getLongitude()));
+			gmaps.addRightClickListener(ev -> Notification
+					.show("Right click at latitude: " + ev.getLatitude()
+							+ "; Longitude: " + ev.getLongitude()));
+
 			GoogleMapMarker flowingmarker = gmaps.addMarker("Center", new LatLon(-31.636036, -60.7055271), true,
 					"https://www.flowingcode.com/wp-content/uploads/2020/06/FCMarker.png");
 			flowingmarker.addInfoWindow("<h1>Flowing Code</h1>");
