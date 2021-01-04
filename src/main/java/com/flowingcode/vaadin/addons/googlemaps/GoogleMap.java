@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,15 +20,20 @@
 package com.flowingcode.vaadin.addons.googlemaps;
 
 import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
-
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.DomEvent;
+import com.vaadin.flow.component.EventData;
 import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.Synchronize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
+import com.vaadin.flow.shared.Registration;
+import elemental.json.JsonObject;
+import elemental.json.JsonValue;
 
 @SuppressWarnings("serial")
 @Tag("google-map")
@@ -155,8 +160,9 @@ public class GoogleMap extends Component implements HasSize {
 	 */
 	public void addMarker(GoogleMapMarker marker) {
 		this.getElement().appendChild(marker.getElement());
-		if (this.getElement().getParent() != null)
+		if (this.getElement().getParent() != null) {
 			this.getElement().executeJs("this._updateMarkers()");
+		}
 	}
 
 	@SuppressWarnings("squid:S3242")
@@ -234,6 +240,56 @@ public class GoogleMap extends Component implements HasSize {
 	 */
 	public int getMinZoom() {
 		return this.getElement().getProperty("minZoom", 1);
+	}
+
+	@DomEvent("google-map-click")
+	public static class GoogleMapClickEvent extends ClickEvent<GoogleMap> {
+		private final double lat;
+		private final double lon;
+		public double getLatitude() {
+			return this.lat;
+		}
+		public double getLongitude() {
+			return this.lon;
+		}
+		public GoogleMapClickEvent(GoogleMap source, boolean fromClient,
+				@EventData(value = "event.detail.latLng") JsonValue latLng) {
+			super(source);
+			this.lat = ((JsonObject) latLng).getNumber("lat");
+			this.lon = ((JsonObject) latLng).getNumber("lng");
+		}
+	}
+
+	public Registration addClickListener(
+			ComponentEventListener<GoogleMapClickEvent> listener) {
+		this.getElement().setProperty("clickable", true);
+		this.getElement().setProperty("clickEvents", true);
+		return addListener(GoogleMapClickEvent.class, listener);
+	}
+
+	@DomEvent("google-map-rightclick")
+	public static class GoogleMapRightClickEvent extends ClickEvent<GoogleMap> {
+		private final double lat;
+		private final double lon;
+		public double getLatitude() {
+			return this.lat;
+		}
+		public double getLongitude() {
+			return this.lon;
+		}
+		public GoogleMapRightClickEvent(GoogleMap source, boolean fromClient,
+				@EventData(value = "event.detail.latLng") JsonValue latLng) {
+			super(source);
+			this.lat = ((JsonObject)latLng).getNumber("lat");
+			this.lon = ((JsonObject)latLng).getNumber("lng");
+		}
+	}
+
+	public Registration addRightClickListener(
+			ComponentEventListener<GoogleMapRightClickEvent> listener) {
+		this.getElement().setProperty("clickable", true);
+		this.getElement().setProperty("clickEvents", true);
+		return addListener(GoogleMapRightClickEvent.class, listener);
 	}
 
 }
