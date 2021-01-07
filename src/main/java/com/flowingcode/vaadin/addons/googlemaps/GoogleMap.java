@@ -24,13 +24,13 @@ import org.apache.commons.lang3.StringUtils;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.DomEvent;
 import com.vaadin.flow.component.EventData;
 import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.Synchronize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
+import com.vaadin.flow.dom.DomListenerRegistration;
 import com.vaadin.flow.shared.Registration;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
@@ -242,7 +242,6 @@ public class GoogleMap extends Component implements HasSize {
 		return this.getElement().getProperty("minZoom", 1);
 	}
 
-	@DomEvent("google-map-click")
 	public static class GoogleMapClickEvent extends ClickEvent<GoogleMap> {
 		private final double lat;
 		private final double lon;
@@ -264,32 +263,26 @@ public class GoogleMap extends Component implements HasSize {
 			ComponentEventListener<GoogleMapClickEvent> listener) {
 		this.getElement().setProperty("clickable", true);
 		this.getElement().setProperty("clickEvents", true);
-		return addListener(GoogleMapClickEvent.class, listener);
-	}
-
-	@DomEvent("google-map-rightclick")
-	public static class GoogleMapRightClickEvent extends ClickEvent<GoogleMap> {
-		private final double lat;
-		private final double lon;
-		public double getLatitude() {
-			return this.lat;
-		}
-		public double getLongitude() {
-			return this.lon;
-		}
-		public GoogleMapRightClickEvent(GoogleMap source, boolean fromClient,
-				@EventData(value = "event.detail.latLng") JsonValue latLng) {
-			super(source);
-			this.lat = ((JsonObject)latLng).getNumber("lat");
-			this.lon = ((JsonObject)latLng).getNumber("lng");
-		}
+		DomListenerRegistration registration = this.getElement()
+				.addEventListener("google-map-click", ev -> {
+			JsonObject latLng = ev.getEventData().get("event.detail.latLng");
+					listener.onComponentEvent(
+							new GoogleMapClickEvent(this, true, latLng));
+		}).addEventData("event.detail.latLng");
+		return registration::remove;
 	}
 
 	public Registration addRightClickListener(
-			ComponentEventListener<GoogleMapRightClickEvent> listener) {
+			ComponentEventListener<GoogleMapClickEvent> listener) {
 		this.getElement().setProperty("clickable", true);
 		this.getElement().setProperty("clickEvents", true);
-		return addListener(GoogleMapRightClickEvent.class, listener);
+		DomListenerRegistration registration = this.getElement()
+				.addEventListener("google-map-rightclick", ev -> {
+			JsonObject latLng = ev.getEventData().get("event.detail.latLng");
+					listener.onComponentEvent(
+							new GoogleMapClickEvent(this, true, latLng));
+		}).addEventData("event.detail.latLng");
+		return registration::remove;
 	}
 
 }
