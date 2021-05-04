@@ -28,7 +28,7 @@
                 <include>*.pdf</include>
             </includes>
             <excludes>
-				<exclude>*-tests.jar</exclude>
+				<exclude>*-demo.jar</exclude>
 			</excludes>
         </fileSet>
     </fileSets>
