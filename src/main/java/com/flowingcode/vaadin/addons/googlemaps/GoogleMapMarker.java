@@ -31,7 +31,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @SuppressWarnings("serial")
 @Tag("google-map-marker")
 @JsModule("@flowingcode/google-map/google-map-marker.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.0.1")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.0.2")
 public class GoogleMapMarker extends Component {
 
     private static long idCounter = 0;

@@ -39,7 +39,7 @@ import com.vaadin.flow.shared.Registration;
 @Tag("google-map-poly")
 @JsModule("@flowingcode/google-map/google-map-poly.js")
 @JsModule("@flowingcode/google-map/google-map-point.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.0.1")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.0.2")
 public class GoogleMapPolygon extends Component {
 
 	private static final double DEFAULT_FILL_OPACITY = 0.5d;
