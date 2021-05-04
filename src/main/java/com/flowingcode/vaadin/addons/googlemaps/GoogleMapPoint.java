@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,25 +30,28 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @NpmPackage(value = "@flowingcode/google-map", version = "3.0.2")
 public class GoogleMapPoint extends Component {
 
-	public GoogleMapPoint(LatLon latlon) {
-		this(latlon.getLat(),latlon.getLon());
-	}
-	
-	public GoogleMapPoint(Double latitude, Double longitude) {
-		this.setLatitude(latitude);
-		this.setLongitude(longitude);
-	}
-	
-	public Double getLatitude() {
-		return this.getElement().getProperty("latitude", 0d);
-	}
-	public void setLatitude(Double latitude) {
-		this.getElement().setProperty("latitude", latitude);
-	}
-	public Double getLongitude() {
-		return this.getElement().getProperty("longitude", 0d);
-	}
-	public void setLongitude(Double longitude) {
-		this.getElement().setProperty("longitude", longitude);
-	}
+  public GoogleMapPoint(LatLon latlon) {
+    this(latlon.getLat(), latlon.getLon());
+  }
+
+  public GoogleMapPoint(Double latitude, Double longitude) {
+    this.setLatitude(latitude);
+    this.setLongitude(longitude);
+  }
+
+  public Double getLatitude() {
+    return this.getElement().getProperty("latitude", 0d);
+  }
+
+  public void setLatitude(Double latitude) {
+    this.getElement().setProperty("latitude", latitude);
+  }
+
+  public Double getLongitude() {
+    return this.getElement().getProperty("longitude", 0d);
+  }
+
+  public void setLongitude(Double longitude) {
+    this.getElement().setProperty("longitude", longitude);
+  }
 }

@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,10 +19,6 @@
  */
 package com.flowingcode.vaadin.addons.googlemaps;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -31,10 +27,11 @@ import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.shared.Registration;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-/**
- * A class representing a polygon overlay of Google Maps.
- */
+/** A class representing a polygon overlay of Google Maps. */
 @SuppressWarnings("serial")
 @Tag("google-map-poly")
 @JsModule("@flowingcode/google-map/google-map-poly.js")
@@ -42,129 +39,133 @@ import com.vaadin.flow.shared.Registration;
 @NpmPackage(value = "@flowingcode/google-map", version = "3.0.2")
 public class GoogleMapPolygon extends Component {
 
-	private static final double DEFAULT_FILL_OPACITY = 0.5d;
-	private static final String DEFAULT_FILL_COLOR = "blue";
+  private static final double DEFAULT_FILL_OPACITY = 0.5d;
+  private static final String DEFAULT_FILL_COLOR = "blue";
 
-	public enum StrokePosition {
-		CENTER, INSIDE, OUTSIDE
-	}
+  public enum StrokePosition {
+    CENTER,
+    INSIDE,
+    OUTSIDE
+  }
 
-	public GoogleMapPolygon(List<GoogleMapPoint> points) {
-		getElement().removeProperty("draggable");
-		setClosed(true);
-		setFillColor(DEFAULT_FILL_COLOR);
-		setFillOpacity(DEFAULT_FILL_OPACITY);
-		setPoints(points);
-	}
+  public GoogleMapPolygon(List<GoogleMapPoint> points) {
+    getElement().removeProperty("draggable");
+    setClosed(true);
+    setFillColor(DEFAULT_FILL_COLOR);
+    setFillOpacity(DEFAULT_FILL_OPACITY);
+    setPoints(points);
+  }
 
-	public void setFillOpacity(double opacity) {
-		this.getElement().setProperty("fillOpacity", opacity);
-	}
+  public void setFillOpacity(double opacity) {
+    this.getElement().setProperty("fillOpacity", opacity);
+  }
 
-	public double getFillOpacity() {
-		return this.getElement().getProperty("fillOpacity", 1d);
-	}
+  public double getFillOpacity() {
+    return this.getElement().getProperty("fillOpacity", 1d);
+  }
 
-	public void setStrokeOpacity(double opacity) {
-		this.getElement().setProperty("strokeOpacity", opacity);
-	}
+  public void setStrokeOpacity(double opacity) {
+    this.getElement().setProperty("strokeOpacity", opacity);
+  }
 
-	public double getStrokeOpacity() {
-		return this.getElement().getProperty("strokeOpacity", 1d);
-	}
+  public double getStrokeOpacity() {
+    return this.getElement().getProperty("strokeOpacity", 1d);
+  }
 
-	public void setStrokePosition(StrokePosition position) {
-		this.getElement().setProperty("strokePosition", position.name().toLowerCase());
-	}
+  public void setStrokePosition(StrokePosition position) {
+    this.getElement().setProperty("strokePosition", position.name().toLowerCase());
+  }
 
-	public StrokePosition getStrokePosition() {
-		return StrokePosition.valueOf(this.getElement().getProperty("strokePosition").toUpperCase());
-	}
+  public StrokePosition getStrokePosition() {
+    return StrokePosition.valueOf(this.getElement().getProperty("strokePosition").toUpperCase());
+  }
 
-	public void setStrokeWeight(double weight) {
-		this.getElement().setProperty("strokeWeight", weight);
-	}
+  public void setStrokeWeight(double weight) {
+    this.getElement().setProperty("strokeWeight", weight);
+  }
 
-	public double getStrokeWeight() {
-		return this.getElement().getProperty("strokeWeight", 1d);
-	}
+  public double getStrokeWeight() {
+    return this.getElement().getProperty("strokeWeight", 1d);
+  }
 
-	public void setZIndex(double zindex) {
-		this.getElement().setProperty("zIndex", zindex);
-	}
+  public void setZIndex(double zindex) {
+    this.getElement().setProperty("zIndex", zindex);
+  }
 
-	public double getZIndex() {
-		return this.getElement().getProperty("zIndex", 1d);
-	}
+  public double getZIndex() {
+    return this.getElement().getProperty("zIndex", 1d);
+  }
 
-	public void setFillColor(String string) {
-		this.getElement().setProperty("fillColor", string);
-	}
+  public void setFillColor(String string) {
+    this.getElement().setProperty("fillColor", string);
+  }
 
-	public String getFillColor() {
-		return this.getElement().getProperty("fillColor");
-	}
+  public String getFillColor() {
+    return this.getElement().getProperty("fillColor");
+  }
 
-	public void setStrokeColor(String string) {
-		this.getElement().setProperty("strokeColor", string);
-	}
+  public void setStrokeColor(String string) {
+    this.getElement().setProperty("strokeColor", string);
+  }
 
-	public String getStrokeColor() {
-		return this.getElement().getProperty("strokeColor");
-	}
+  public String getStrokeColor() {
+    return this.getElement().getProperty("strokeColor");
+  }
 
-	public void setClosed(boolean b) {
-		this.getElement().setProperty("closed", b);
-	}
+  public void setClosed(boolean b) {
+    this.getElement().setProperty("closed", b);
+  }
 
-	public boolean isClosed() {
-		return this.getElement().getProperty("closed", false);
-	}
+  public boolean isClosed() {
+    return this.getElement().getProperty("closed", false);
+  }
 
-	public void setGeodesic(boolean b) {
-		this.getElement().setProperty("geodesic", b);
-	}
+  public void setGeodesic(boolean b) {
+    this.getElement().setProperty("geodesic", b);
+  }
 
-	public boolean isGeodesic() {
-		return this.getElement().getProperty("geodesic", false);
-	}
+  public boolean isGeodesic() {
+    return this.getElement().getProperty("geodesic", false);
+  }
 
-	public void setPoints(Iterable<GoogleMapPoint> points) {
-		points.forEach(point -> this.getElement().appendChild(point.getElement()));
-	}
+  public void setPoints(Iterable<GoogleMapPoint> points) {
+    points.forEach(point -> this.getElement().appendChild(point.getElement()));
+  }
 
-	public GoogleMapPoint addPoint(LatLon position) {
-		GoogleMapPoint point = new GoogleMapPoint(position.getLat(), position.getLon());
-		this.getElement().appendChild(point.getElement());
-		return point;
-	}
+  public GoogleMapPoint addPoint(LatLon position) {
+    GoogleMapPoint point = new GoogleMapPoint(position.getLat(), position.getLon());
+    this.getElement().appendChild(point.getElement());
+    return point;
+  }
 
-	public void addPoint(GoogleMapPoint point) {
-		this.getElement().appendChild(point.getElement());
-	}
+  public void addPoint(GoogleMapPoint point) {
+    this.getElement().appendChild(point.getElement());
+  }
 
-    @SuppressWarnings("squid:S3242")
-	public void removePoint(GoogleMapPoint point) {
-		this.getElement().removeChild(point.getElement());
-	}
+  @SuppressWarnings("squid:S3242")
+  public void removePoint(GoogleMapPoint point) {
+    this.getElement().removeChild(point.getElement());
+  }
 
-	@DomEvent("google-map-poly-click")
-	public static class GoogleMapPolygonClickEvent extends ClickEvent<GoogleMapPolygon> {
-		public GoogleMapPolygonClickEvent(GoogleMapPolygon source, boolean fromClient) {
-			super(source);
-		}
-	}
+  @DomEvent("google-map-poly-click")
+  public static class GoogleMapPolygonClickEvent extends ClickEvent<GoogleMapPolygon> {
+    public GoogleMapPolygonClickEvent(GoogleMapPolygon source, boolean fromClient) {
+      super(source);
+    }
+  }
 
-	public Registration addClickListener(ComponentEventListener<GoogleMapPolygonClickEvent> listener) {
-		this.getElement().setProperty("clickable", true);
-		this.getElement().setProperty("clickEvents", true);
-		return addListener(GoogleMapPolygonClickEvent.class, listener);
-	}
+  public Registration addClickListener(
+      ComponentEventListener<GoogleMapPolygonClickEvent> listener) {
+    this.getElement().setProperty("clickable", true);
+    this.getElement().setProperty("clickEvents", true);
+    return addListener(GoogleMapPolygonClickEvent.class, listener);
+  }
 
-	public void setIcons(Icon... icons) {
-		String iconsStr = "["
-				+ Arrays.asList(icons).stream().map(Icon::getJson).collect(Collectors.joining(",")) + "]";
-		getElement().executeJs("this.icons=" + iconsStr);
-	}
-
+  public void setIcons(Icon... icons) {
+    String iconsStr =
+        "["
+            + Arrays.asList(icons).stream().map(Icon::getJson).collect(Collectors.joining(","))
+            + "]";
+    getElement().executeJs("this.icons=" + iconsStr);
+  }
 }

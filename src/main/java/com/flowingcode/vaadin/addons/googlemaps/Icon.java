@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,64 +21,76 @@ package com.flowingcode.vaadin.addons.googlemaps;
 
 public class Icon {
 
-	private String path;
-	private String strokeColor;
-	private String fillColor;
-	private int fillOpacity;
-	private int repeat;
+  private String path;
+  private String strokeColor;
+  private String fillColor;
+  private int fillOpacity;
+  private int repeat;
 
-	public Icon(String path, String strokeColor, String fillColor, int fillOpacity, int repeat) {
-		super();
-		this.path = path;
-		this.strokeColor = strokeColor;
-		this.fillColor = fillColor;
-		this.fillOpacity = fillOpacity;
-		this.repeat = repeat;
-	}
+  public Icon(String path, String strokeColor, String fillColor, int fillOpacity, int repeat) {
+    super();
+    this.path = path;
+    this.strokeColor = strokeColor;
+    this.fillColor = fillColor;
+    this.fillOpacity = fillOpacity;
+    this.repeat = repeat;
+  }
 
-	public String getPath() {
-		return path;
-	}
+  public String getPath() {
+    return path;
+  }
 
-	public void setPath(String path) {
-		this.path = path;
-	}
+  public void setPath(String path) {
+    this.path = path;
+  }
 
-	public String getStrokeColor() {
-		return strokeColor;
-	}
+  public String getStrokeColor() {
+    return strokeColor;
+  }
 
-	public void setStrokeColor(String strokeColor) {
-		this.strokeColor = strokeColor;
-	}
+  public void setStrokeColor(String strokeColor) {
+    this.strokeColor = strokeColor;
+  }
 
-	public String getFillColor() {
-		return fillColor;
-	}
+  public String getFillColor() {
+    return fillColor;
+  }
 
-	public void setFillColor(String fillColor) {
-		this.fillColor = fillColor;
-	}
+  public void setFillColor(String fillColor) {
+    this.fillColor = fillColor;
+  }
 
-	public int getFillOpacity() {
-		return fillOpacity;
-	}
+  public int getFillOpacity() {
+    return fillOpacity;
+  }
 
-	public void setFillOpacity(int fillOpacity) {
-		this.fillOpacity = fillOpacity;
-	}
+  public void setFillOpacity(int fillOpacity) {
+    this.fillOpacity = fillOpacity;
+  }
 
-	public int getRepeat() {
-		return repeat;
-	}
+  public int getRepeat() {
+    return repeat;
+  }
 
-	public void setRepeat(int repeat) {
-		this.repeat = repeat;
-	}
+  public void setRepeat(int repeat) {
+    this.repeat = repeat;
+  }
 
-	protected String getJson() {
-		return "{icon:{" + "path: '" + getPath() + "'," + "strokeColor: '" + getStrokeColor() + "'," + "fillColor: '"
-				+ getFillColor() + "'," + "fillOpacity: " + getFillOpacity() + "} , repeat: '" + getRepeat() + "px'}";
-	}
-
+  protected String getJson() {
+    return "{icon:{"
+        + "path: '"
+        + getPath()
+        + "',"
+        + "strokeColor: '"
+        + getStrokeColor()
+        + "',"
+        + "fillColor: '"
+        + getFillColor()
+        + "',"
+        + "fillOpacity: "
+        + getFillOpacity()
+        + "} , repeat: '"
+        + getRepeat()
+        + "px'}";
+  }
 }
