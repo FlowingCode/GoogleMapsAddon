@@ -38,7 +38,7 @@ import elemental.json.JsonValue;
 @SuppressWarnings("serial")
 @Tag("google-map")
 @JsModule("@flowingcode/google-map/google-map.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.0.1")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.0.2")
 public class GoogleMap extends Component implements HasSize {
 
 	/**
