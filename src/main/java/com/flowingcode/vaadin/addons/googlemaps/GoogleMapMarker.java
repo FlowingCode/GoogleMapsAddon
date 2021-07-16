@@ -86,7 +86,7 @@ public class GoogleMapMarker extends Component {
     this.getElement().setAttribute("title", caption);
     this.getElement().setAttribute("latitude", "" + position.getLat());
     this.getElement().setAttribute("longitude", "" + position.getLon());
-    this.getElement().setAttribute("draggable", draggable);
+    this.getElement().setAttribute("draggable", String.valueOf(draggable));
     this.getElement().setAttribute("icon", iconUrl);
   }
 
