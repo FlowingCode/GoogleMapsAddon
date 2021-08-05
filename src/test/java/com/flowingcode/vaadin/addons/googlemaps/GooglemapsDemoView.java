@@ -32,9 +32,13 @@ public class GooglemapsDemoView extends TabbedDemo {
   private static final String GMAPS_DEMO = "Google Maps Demo";
   private static final String GMAPS_SOURCE =
       "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/GoogleMapsDemo.java";
+  private static final String GEOLOCATION_DEMO = "Geolocation Demo";
+  private static final String GEOLOCATION_SOURCE =
+      "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/GeolocationDemo.java";
 
   public GooglemapsDemoView() {
     addDemo(new GoogleMapsDemo(), GMAPS_DEMO, GMAPS_SOURCE);
+    addDemo(new GeolocationDemo(), GEOLOCATION_DEMO, GEOLOCATION_SOURCE);
     setSizeFull();
   }
 }
