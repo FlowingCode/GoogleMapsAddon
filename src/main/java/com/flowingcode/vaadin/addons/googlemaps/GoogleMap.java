@@ -20,8 +20,11 @@
 package com.flowingcode.vaadin.addons.googlemaps;
 
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.EventData;
 import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.Synchronize;
@@ -39,6 +42,7 @@ import org.apache.commons.lang3.StringUtils;
 @Tag("google-map")
 @JsModule("@flowingcode/google-map/google-map.js")
 @NpmPackage(value = "@flowingcode/google-map", version = "3.0.2")
+@JsModule("./googlemaps/geolocation.js")
 public class GoogleMap extends Component implements HasSize {
 
   /** Base map types supported by Google Maps. */
@@ -292,5 +296,80 @@ public class GoogleMap extends Component implements HasSize {
                 })
             .addEventData("event.detail.latLng");
     return registration::remove;
+  }
+
+  /**
+   * Sets current location on map.
+   *
+   * <p>Setting geolocation requires that the user gives consent to location sharing when prompted
+   * by the browser.
+   */
+  public void goToCurrentLocation() {
+    getElement().executeJs("geolocation.get($0)", this);
+  }
+
+  @ClientCallable
+  private void handleGeolocation(double latitude, double longitude) {
+    this.setCenter(new LatLon(latitude, longitude));
+    ComponentUtil.fireEvent(this, new CurrentLocationEvent(this, false));
+  }
+
+  /**
+   * Handles what to do if browser doesn't have permission to get the location or if browser doesn't
+   * support geolocation.
+   *
+   * @param browserHasGeolocationSupport whether browser supports geolocation or not
+   */
+  @ClientCallable
+  private void handleGeolocationError(boolean browserHasGeolocationSupport) {
+    ComponentUtil.fireEvent(
+        this, new GeolocationErrorEvent(this, false, browserHasGeolocationSupport));
+  }
+
+  /** Event that is fired when setting current location on map. */
+  public class CurrentLocationEvent extends ComponentEvent<GoogleMap> {
+
+    public CurrentLocationEvent(GoogleMap source, boolean fromClient) {
+      super(source, fromClient);
+    }
+  }
+
+  /** Event that is called when current location can't be found. */
+  public class GeolocationErrorEvent extends ComponentEvent<GoogleMap> {
+
+    private boolean browserHasGeolocationSupport;
+
+    public GeolocationErrorEvent(
+        GoogleMap source, boolean fromClient, boolean browserHasGeolocationSupport) {
+      super(source, fromClient);
+      this.browserHasGeolocationSupport = browserHasGeolocationSupport;
+    }
+
+    public boolean isBrowserHasGeolocationSupport() {
+      return browserHasGeolocationSupport;
+    }
+  }
+
+  /**
+   * Adds a CurrentLocationEvent listener. The listener is called when setting the current location.
+   *
+   * @param listener
+   * @return
+   */
+  public Registration addCurrentLocationEventListener(
+      ComponentEventListener<CurrentLocationEvent> listener) {
+    return addListener(CurrentLocationEvent.class, listener);
+  }
+
+  /**
+   * Adds a GeolocationErrorEvent listener. The listener is called when current location can't be
+   * found.
+   *
+   * @param listener
+   * @return
+   */
+  public Registration addGeolocationErrorEventListener(
+      ComponentEventListener<GeolocationErrorEvent> listener) {
+    return addListener(GeolocationErrorEvent.class, listener);
   }
 }
