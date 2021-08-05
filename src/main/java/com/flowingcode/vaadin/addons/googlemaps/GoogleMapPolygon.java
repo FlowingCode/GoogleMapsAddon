@@ -23,10 +23,13 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.DomEvent;
+import com.vaadin.flow.component.EventData;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.shared.Registration;
+import elemental.json.JsonObject;
+import elemental.json.JsonValue;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -149,8 +152,25 @@ public class GoogleMapPolygon extends Component {
 
   @DomEvent("google-map-poly-click")
   public static class GoogleMapPolygonClickEvent extends ClickEvent<GoogleMapPolygon> {
-    public GoogleMapPolygonClickEvent(GoogleMapPolygon source, boolean fromClient) {
+
+    private final double lat;
+    private final double lon;
+
+    public GoogleMapPolygonClickEvent(
+        GoogleMapPolygon source,
+        boolean fromClient,
+        @EventData(value = "event.detail.latLng") JsonValue latLng) {
       super(source);
+      this.lat = ((JsonObject) latLng).getNumber("lat");
+      this.lon = ((JsonObject) latLng).getNumber("lng");
+    }
+
+    public double getLatitude() {
+      return this.lat;
+    }
+
+    public double getLongitude() {
+      return this.lon;
     }
   }
 
