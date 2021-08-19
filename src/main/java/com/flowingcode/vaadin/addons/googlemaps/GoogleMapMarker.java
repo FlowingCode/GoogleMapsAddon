@@ -20,10 +20,17 @@
 package com.flowingcode.vaadin.addons.googlemaps;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.DomEvent;
+import com.vaadin.flow.component.EventData;
 import com.vaadin.flow.component.Synchronize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
+import com.vaadin.flow.shared.Registration;
+import elemental.json.JsonObject;
+import elemental.json.JsonValue;
 
 /** The class representing a marker of the Google Map. */
 @SuppressWarnings("serial")
@@ -208,5 +215,41 @@ public class GoogleMapMarker extends Component {
 
   public void setIdentifier(long id) {
     this.id = id;
+  }
+
+  /** Event that is called on marker's drag end. */
+  @DomEvent("google-map-marker-dragend")
+  public static class DragEndEvent extends ComponentEvent<GoogleMapMarker> {
+
+    private final double lat;
+    private final double lon;
+
+    public DragEndEvent(
+        GoogleMapMarker source,
+        boolean fromClient,
+        @EventData(value = "event.detail.latLng") JsonValue latLng) {
+      super(source, fromClient);
+      this.lat = ((JsonObject) latLng).getNumber("lat");
+      this.lon = ((JsonObject) latLng).getNumber("lng");
+    }
+
+    public double getLatitude() {
+      return this.lat;
+    }
+
+    public double getLongitude() {
+      return this.lon;
+    }
+  }
+
+  /**
+   * Adds a DragEndEvent listener. The listener is called when a marker' drag ends.
+   * 
+   * @param listener
+   * @return
+   */
+  public Registration addDragEndEventListener(ComponentEventListener<DragEndEvent> listener) {
+    this.getElement().setProperty("dragEvents", true);
+    return addListener(DragEndEvent.class, listener);
   }
 }
