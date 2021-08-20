@@ -83,11 +83,10 @@ public class GoogleMapMarker extends Component {
   }
 
   private void initialize() {
-    this.getElement().setAttribute("title", caption);
-    this.getElement().setAttribute("latitude", "" + position.getLat());
-    this.getElement().setAttribute("longitude", "" + position.getLon());
-    this.getElement().setAttribute("draggable", String.valueOf(draggable));
-    this.getElement().setAttribute("icon", iconUrl);
+    this.setCaption(caption);
+    this.setPosition(position);
+    this.setDraggable(draggable);
+    this.setIconUrl(iconUrl);
   }
 
   public void addInfoWindow(String htmlContent) {
@@ -112,7 +111,10 @@ public class GoogleMapMarker extends Component {
    * @return The position of the marker.
    */
   public LatLon getPosition() {
-    return position;
+    final LatLon latLon = new LatLon();
+    latLon.setLat(this.getElement().getProperty("latitude", 0d));
+    latLon.setLon(this.getElement().getProperty("longitude", 0d));
+    return latLon;
   }
 
   /**
@@ -121,7 +123,8 @@ public class GoogleMapMarker extends Component {
    * @param position The new position of the marker.
    */
   public void setPosition(LatLon position) {
-    this.position = position;
+    this.getElement().setProperty("latitude", position.getLat());
+    this.getElement().setProperty("longitude", position.getLon());
   }
 
   /**
@@ -130,7 +133,7 @@ public class GoogleMapMarker extends Component {
    * @return The caption of the marker.
    */
   public String getCaption() {
-    return caption;
+    return this.getElement().getProperty("title");
   }
 
   /**
@@ -139,7 +142,7 @@ public class GoogleMapMarker extends Component {
    * @param caption The new caption of the marker.
    */
   public void setCaption(String caption) {
-    this.caption = caption;
+    this.getElement().setProperty("title", caption);
   }
 
   /**
@@ -148,7 +151,7 @@ public class GoogleMapMarker extends Component {
    * @return true, if it is draggable
    */
   public boolean isDraggable() {
-    return draggable;
+    return this.getElement().getProperty("draggable", false);
   }
 
   /**
@@ -157,7 +160,7 @@ public class GoogleMapMarker extends Component {
    * @param draggable Set to true to enable dragging.
    */
   public void setDraggable(boolean draggable) {
-    this.draggable = draggable;
+    this.getElement().setProperty("draggable", draggable);
   }
 
   /**
@@ -166,7 +169,7 @@ public class GoogleMapMarker extends Component {
    * @return the url of the icon, default null.
    */
   public String getIconUrl() {
-    return iconUrl;
+    return this.getElement().getProperty("icon");
   }
 
   /**
@@ -175,7 +178,7 @@ public class GoogleMapMarker extends Component {
    * @param iconUrl The new url of the icon.
    */
   public void setIconUrl(String iconUrl) {
-    this.iconUrl = iconUrl;
+    this.getElement().setProperty("icon", iconUrl);
   }
 
   /**
