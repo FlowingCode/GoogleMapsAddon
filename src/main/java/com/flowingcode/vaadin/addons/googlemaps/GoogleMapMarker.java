@@ -126,7 +126,7 @@ public class GoogleMapMarker extends Component {
    * @param caption The new caption of the marker.
    */
   public void setCaption(String caption) {
-    this.getElement().setProperty("title", caption);
+    this.getElement().setProperty("title", caption != null ? caption : "");
   }
 
   /**
