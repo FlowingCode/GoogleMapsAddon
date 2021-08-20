@@ -36,14 +36,6 @@ public class GoogleMapMarker extends Component {
 
   private long id;
 
-  private LatLon position = new LatLon(0, 0);
-
-  private String caption = "";
-
-  private boolean draggable = false;
-
-  private String iconUrl = null;
-
   private boolean animationEnabled = true;
 
   private boolean optimized = true;
@@ -63,9 +55,9 @@ public class GoogleMapMarker extends Component {
    */
   public GoogleMapMarker(String caption, LatLon position, boolean draggable) {
     this();
-    this.caption = caption;
-    this.position = position;
-    this.draggable = draggable;
+    this.setCaption(caption);
+    this.setPosition(position);
+    this.setDraggable(draggable);
     this.getElement().setAttribute("slot", "markers");
   }
 
@@ -78,14 +70,6 @@ public class GoogleMapMarker extends Component {
    */
   public GoogleMapMarker(String caption, LatLon position, boolean draggable, String iconUrl) {
     this(caption, position, draggable);
-    this.iconUrl = iconUrl;
-    this.initialize();
-  }
-
-  private void initialize() {
-    this.setCaption(caption);
-    this.setPosition(position);
-    this.setDraggable(draggable);
     this.setIconUrl(iconUrl);
   }
 
