@@ -21,43 +21,34 @@ package com.flowingcode.vaadin.addons.googlemaps;
 
 import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class GeolocationDemo extends VerticalLayout {
+public class GeolocationDemo extends AbstractGoogleMapsDemo {
 
-  public GeolocationDemo() {
-    this.setSizeFull();
-    String apiKey = System.getProperty("google.maps.api");
-    if (apiKey == null) {
-      add(
-          new H2(
-              "Api key is needded to run the demo, pass it using the following system property: '-Dgoogle.maps.api=<your-api-key>'"));
-    } else {
-      GoogleMap gmaps = new GoogleMap(apiKey, null, null);
-      gmaps.setMapType(MapType.ROADMAP);
-      gmaps.setSizeFull();
+  @Override
+  protected void createGoogleMapsDemo(String apiKey) {
+    GoogleMap gmaps = new GoogleMap(apiKey, null, null);
+    gmaps.setMapType(MapType.ROADMAP);
+    gmaps.setSizeFull();
 
-      FlexLayout layout = new FlexLayout();
-      layout.setFlexWrap(FlexWrap.WRAP);
-      layout.add(new Button("Go to current location", e -> gmaps.goToCurrentLocation()));
-      add(gmaps, layout);
+    FlexLayout layout = new FlexLayout();
+    layout.setFlexWrap(FlexWrap.WRAP);
+    layout.add(new Button("Go to current location", e -> gmaps.goToCurrentLocation()));
+    add(gmaps, layout);
 
-      gmaps.addCurrentLocationEventListener(
-          e ->
-              gmaps.addMarker(
-                  new GoogleMapMarker("You are here!", gmaps.getCenter(), false, Markers.GREEN)));
+    gmaps.addCurrentLocationEventListener(
+        e ->
+            gmaps.addMarker(
+                new GoogleMapMarker("You are here!", gmaps.getCenter(), false, Markers.GREEN)));
 
-      gmaps.addGeolocationErrorEventListener(
-          e ->
-              Notification.show(
-                  e.isBrowserHasGeolocationSupport()
-                      ? "The geolocation service failed on retrieving your location."
-                      : "Your browser doesn't support geolocation."));
-    }
+    gmaps.addGeolocationErrorEventListener(
+        e ->
+            Notification.show(
+                e.isBrowserHasGeolocationSupport()
+                    ? "The geolocation service failed on retrieving your location."
+                    : "Your browser doesn't support geolocation."));
   }
 }
