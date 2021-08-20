@@ -29,24 +29,11 @@ import com.vaadin.flow.router.Route;
 @GithubLink("https://github.com/FlowingCode/GoogleMapsAddon")
 public class GooglemapsDemoView extends TabbedDemo {
 
-  private static final String GMAPS_DEMO = "Google Maps Demo";
-  private static final String GMAPS_SOURCE =
-      "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/GoogleMapsDemo.java";
-  private static final String ADD_MARKERS_DEMO = "Add Markers Demo";
-  private static final String ADD_MARKERS_SOURCE =
-      "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/AddMarkersDemo.java";
-  private static final String ADD_POLYGONS_DEMO = "Add Polygons Demo";
-  private static final String ADD_POLYGONS_SOURCE =
-      "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/AddPolygonsDemo.java";
-  private static final String GEOLOCATION_DEMO = "Geolocation Demo";
-  private static final String GEOLOCATION_SOURCE =
-      "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/GeolocationDemo.java";
-
   public GooglemapsDemoView() {
-    addDemo(new GoogleMapsDemo(), GMAPS_DEMO, GMAPS_SOURCE);
-    addDemo(new AddMarkersDemo(), ADD_MARKERS_DEMO, ADD_MARKERS_SOURCE);
-    addDemo(new AddPolygonsDemo(), ADD_POLYGONS_DEMO, ADD_POLYGONS_SOURCE);
-    addDemo(new GeolocationDemo(), GEOLOCATION_DEMO, GEOLOCATION_SOURCE);
+    addDemo(new GoogleMapsDemo());
+    addDemo(new AddMarkersDemo());
+    addDemo(new AddPolygonsDemo());
+    addDemo(new GeolocationDemo());
     setSizeFull();
   }
 }

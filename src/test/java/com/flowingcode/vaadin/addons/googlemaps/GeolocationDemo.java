@@ -19,12 +19,17 @@
  */
 package com.flowingcode.vaadin.addons.googlemaps;
 
+import com.flowingcode.vaadin.addons.demo.DemoSource;
 import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
+import com.vaadin.flow.router.PageTitle;
 
+@PageTitle("Geolocation Demo")
+@DemoSource(
+    "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/GeolocationDemo.java")
 @SuppressWarnings("serial")
 public class GeolocationDemo extends AbstractGoogleMapsDemo {
 
