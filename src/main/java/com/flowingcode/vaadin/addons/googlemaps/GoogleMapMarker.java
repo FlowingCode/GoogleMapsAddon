@@ -81,7 +81,7 @@ public class GoogleMapMarker extends Component {
   }
 
   public void addInfoWindow(String htmlContent) {
-    getElement().executeJs("this.innerHTML = $0", htmlContent);
+    this.getElement().setProperty("innerHTML", htmlContent);
   }
 
   @Synchronize(
@@ -92,8 +92,7 @@ public class GoogleMapMarker extends Component {
   }
 
   public void setInfoWindowVisible(boolean visible) {
-    getElement().executeJs("this.open = $0", visible);
-    getElement().executeJs("this._openChanged()");
+    this.getElement().setProperty("open", visible);
   }
 
   /**
