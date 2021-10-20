@@ -19,6 +19,10 @@
  */
 package com.flowingcode.vaadin.addons.googlemaps;
 
+import elemental.json.Json;
+import elemental.json.JsonObject;
+import java.util.Optional;
+
 public class Icon {
 
   private String path;
@@ -76,21 +80,16 @@ public class Icon {
     this.repeat = repeat;
   }
 
-  protected String getJson() {
-    return "{icon:{"
-        + "path: '"
-        + getPath()
-        + "',"
-        + "strokeColor: '"
-        + getStrokeColor()
-        + "',"
-        + "fillColor: '"
-        + getFillColor()
-        + "',"
-        + "fillOpacity: "
-        + getFillOpacity()
-        + "} , repeat: '"
-        + getRepeat()
-        + "px'}";
+  protected JsonObject getJson() {
+    JsonObject options = Json.createObject();
+    Optional.ofNullable(getPath()).ifPresent(value -> options.put("path", value));
+    Optional.ofNullable(getStrokeColor()).ifPresent(value -> options.put("strokeColor", value));
+    Optional.ofNullable(getFillColor()).ifPresent(value -> options.put("fillColor", value));
+    Optional.ofNullable(getFillOpacity()).ifPresent(value -> options.put("fillOpacity", value));
+        
+    JsonObject js = Json.createObject();
+    js.put("icon", options);
+    Optional.ofNullable(getRepeat()).ifPresent(v -> js.put("repeat", v + "px"));
+    return js;    
   }
 }

@@ -28,11 +28,11 @@ import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.shared.Registration;
+import elemental.json.Json;
+import elemental.json.JsonArray;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /** A class representing a polygon overlay of Google Maps. */
 @SuppressWarnings("serial")
@@ -182,10 +182,10 @@ public class GoogleMapPolygon extends Component {
   }
 
   public void setIcons(Icon... icons) {
-    String iconsStr =
-        "["
-            + Arrays.asList(icons).stream().map(Icon::getJson).collect(Collectors.joining(","))
-            + "]";
-    getElement().executeJs("this.icons=" + iconsStr);
+    JsonArray jsonArray = Json.createArray();
+    for (int i = 0; i < icons.length; i++) {
+      jsonArray.set(i, icons[i].getJson());
+    }   
+    this.getElement().setPropertyJson("icons", jsonArray);
   }
 }
