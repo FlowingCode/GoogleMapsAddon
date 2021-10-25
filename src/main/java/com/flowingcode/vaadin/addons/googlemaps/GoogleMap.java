@@ -41,7 +41,7 @@ import org.apache.commons.lang3.StringUtils;
 @SuppressWarnings("serial")
 @Tag("google-map")
 @JsModule("@flowingcode/google-map/google-map.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.0.3")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.0.4")
 @JsModule("./googlemaps/geolocation.js")
 public class GoogleMap extends Component implements HasSize {
 
