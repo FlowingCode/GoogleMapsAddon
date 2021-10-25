@@ -36,7 +36,7 @@ import elemental.json.JsonValue;
 @SuppressWarnings("serial")
 @Tag("google-map-marker")
 @JsModule("@flowingcode/google-map/google-map-marker.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.0.3")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.0.4")
 public class GoogleMapMarker extends Component {
 
   private static long idCounter = 0;
