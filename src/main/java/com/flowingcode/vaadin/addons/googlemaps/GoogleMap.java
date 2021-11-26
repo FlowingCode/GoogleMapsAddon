@@ -246,6 +246,60 @@ public class GoogleMap extends Component implements HasSize {
     return this.getElement().getProperty("minZoom", 1);
   }
 
+  /**
+   * Allows to disable/enable rotate control.
+   * 
+   * @param disable Set true to disable rotate control
+   */
+  public void disableRotateControl(boolean disable) {
+    this.getElement().setProperty("disableRotateControl", disable);
+  }
+
+  /**
+   * Allows to disable/enable street view control.
+   * 
+   * @param disable Set true to disable street view control
+   */
+  public void disableStreetViewControl(boolean disable) {
+    this.getElement().setProperty("disableStreetViewControl", disable);
+  }
+
+  /**
+   * Allows to disable/enable map type control.
+   * 
+   * @param disable Set true to disable map type control
+   */
+  public void disableMapTypeControl(boolean disable) {
+    this.getElement().setProperty("disableMapTypeControl", disable);
+  }
+
+  /**
+   * Allows to disable/enable zoom control.
+   * 
+   * @param disable Set true to disable zoom control
+   */
+  public void disableZoomControl(boolean disable) {
+    this.getElement().setProperty("disableZoomControl", disable);
+  }
+
+  /**
+   * Allows to disable/enable full screen control.
+   * 
+   * @param disable Set true to disable full screen control
+   */
+  public void disableFullScreenControl(boolean disable) {
+    this.getElement().setProperty("disableFullScreenControl", disable);
+  }
+
+  /**
+   * Allows to disable/enable scale control.
+   * 
+   * @param disable Set true to disable scale control
+   */
+  public void disableScaleControl(boolean disable) {
+    this.getElement().setProperty("disableScaleControl", disable);
+  }
+
   public static class GoogleMapClickEvent extends ClickEvent<GoogleMap> {
     private final double lat;
     private final double lon;
