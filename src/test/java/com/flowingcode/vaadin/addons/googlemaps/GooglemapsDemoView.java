@@ -36,6 +36,7 @@ public class GooglemapsDemoView extends TabbedDemo {
     addDemo(new GeolocationDemo());
     addDemo(new DraggableMarkerDemo());
     addDemo(new DisableUIControlsDemo());
+    addDemo(new CloudBasedMapStylingDemo());
     setSizeFull();
   }
 }

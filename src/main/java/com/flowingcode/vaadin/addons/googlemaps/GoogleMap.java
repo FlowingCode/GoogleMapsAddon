@@ -300,6 +300,25 @@ public class GoogleMap extends Component implements HasSize {
     this.getElement().setProperty("disableScaleControl", disable);
   }
 
+  /**
+   * Sets the mapId. See
+   * https://developers.google.com/maps/documentation/javascript/cloud-based-map-styling
+   * 
+   * @param mapId If set, the custom style associated with that map id is applied.
+   */
+  public void setMapId(String mapId) {
+    this.getElement().setProperty("mapId", mapId);
+  }
+
+  /**
+   * Returns the current map id.
+   *
+   * @return The current map id.
+   */
+  public String getMapId() {
+    return this.getElement().getProperty("mapId");
+  }
+  
   public static class GoogleMapClickEvent extends ClickEvent<GoogleMap> {
     private final double lat;
     private final double lon;
@@ -426,4 +445,5 @@ public class GoogleMap extends Component implements HasSize {
       ComponentEventListener<GeolocationErrorEvent> listener) {
     return addListener(GeolocationErrorEvent.class, listener);
   }
+  
 }
