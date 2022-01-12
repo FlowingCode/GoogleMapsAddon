@@ -19,6 +19,7 @@
  */
 package com.flowingcode.vaadin.addons.googlemaps;
 
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -250,5 +251,42 @@ public class GoogleMapMarker extends Component {
   public Registration addDragEndEventListener(ComponentEventListener<DragEndEvent> listener) {
     this.getElement().setProperty("dragEvents", true);
     return addListener(DragEndEvent.class, listener);
+  }
+  
+  /**
+   * Event called on marker's click.
+   */
+  @DomEvent("google-map-marker-click")
+  public static class GoogleMapMarkerClickEvent extends ClickEvent<GoogleMapMarker> {
+
+    private final double lat;
+    private final double lon;
+
+    public GoogleMapMarkerClickEvent(GoogleMapMarker source, boolean fromClient,
+        @EventData(value = "event.detail.latLng") JsonValue latLng) {
+      super(source);
+      this.lat = ((JsonObject) latLng).getNumber("lat");
+      this.lon = ((JsonObject) latLng).getNumber("lng");
+    }
+
+    public double getLatitude() {
+      return this.lat;
+    }
+
+    public double getLongitude() {
+      return this.lon;
+    }
+  }
+
+  /** 
+   * Adds a click event listener to a marker.
+   * 
+   * @param listener
+   * @return
+   */
+  public Registration addClickListener(ComponentEventListener<GoogleMapMarkerClickEvent> listener) {
+    this.getElement().setProperty("clickable", true);
+    this.getElement().setProperty("clickEvents", true);
+    return addListener(GoogleMapMarkerClickEvent.class, listener);
   }
 }
