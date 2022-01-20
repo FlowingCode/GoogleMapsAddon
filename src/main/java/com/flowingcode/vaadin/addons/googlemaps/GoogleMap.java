@@ -319,6 +319,26 @@ public class GoogleMap extends Component implements HasSize {
     return this.getElement().getProperty("mapId");
   }
   
+  /**
+   * Sets the size of the control buttons appearing in the map. Must be specified when creating the
+   * map. See
+   * https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions.controlSize
+   * 
+   * @param controlSize If set, control's size will be updated with this value.
+   */
+  public void setControlSize(int controlSize) {
+    this.getElement().setProperty("controlSize", controlSize);
+  }
+
+  /**
+   * Returns the current control size value.
+   * 
+   * @return The current size of the control buttons.
+   */
+  public int getControlSize() {
+    return this.getElement().getProperty("controlSize", 0);
+  }
+  
   public static class GoogleMapClickEvent extends ClickEvent<GoogleMap> {
     private final double lat;
     private final double lon;
