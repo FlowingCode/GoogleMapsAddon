@@ -27,7 +27,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @SuppressWarnings("serial")
 @Tag("google-map-point")
 @JsModule("@flowingcode/google-map/google-map-point.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.0.5")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.1.0")
 public class GoogleMapPoint extends Component {
 
   public GoogleMapPoint(LatLon latlon) {
