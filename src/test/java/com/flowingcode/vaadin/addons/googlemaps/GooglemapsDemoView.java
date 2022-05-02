@@ -38,6 +38,7 @@ public class GooglemapsDemoView extends TabbedDemo {
     addDemo(new DisableUIControlsDemo());
     addDemo(new CloudBasedMapStylingDemo());
     addDemo(new ControlSizeDemo());
+    addDemo(new KMLLayerDemo());
     setSizeFull();
   }
 }
