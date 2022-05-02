@@ -338,6 +338,24 @@ public class GoogleMap extends Component implements HasSize {
   public int getControlSize() {
     return this.getElement().getProperty("controlSize", 0);
   }
+
+  /**
+   * Sets a KML or GeoRSS feed url to be displayed as a KML Layer in the map.
+   * 
+   * @param url to be displayed.
+   */
+  public void setKml(String kml){
+    this.getElement().setProperty("kml", kml);
+  }
+
+  /**
+   * Returns the current  KML or GeoRSS feed url associated with a KML Layer in the map.
+   * 
+   * @return the current url.
+   */
+  public String getKml() {
+    return this.getElement().getProperty("kml");
+  }
   
   public static class GoogleMapClickEvent extends ClickEvent<GoogleMap> {
     private final double lat;
