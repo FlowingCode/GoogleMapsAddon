@@ -26,10 +26,11 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 @PageTitle("Geolocation Demo")
-@DemoSource(
-    "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/GeolocationDemo.java")
+@DemoSource
+@Route(value = "googlemaps/geolocation", layout = GooglemapsDemoView.class)
 @SuppressWarnings("serial")
 public class GeolocationDemo extends AbstractGoogleMapsDemo {
 

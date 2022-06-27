@@ -25,9 +25,11 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 @PageTitle("Disable UI controls Demo")
-@DemoSource("https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/DisableUIControlsDemo.java")
+@DemoSource
+@Route(value = "googlemaps/disablecontrols", layout = GooglemapsDemoView.class)
 @SuppressWarnings("serial")
 public class DisableUIControlsDemo extends AbstractGoogleMapsDemo {
 

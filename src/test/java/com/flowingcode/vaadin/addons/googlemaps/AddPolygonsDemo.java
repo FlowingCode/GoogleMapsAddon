@@ -26,11 +26,12 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 import java.util.Arrays;
 
 @PageTitle("Add Polygons Demo")
-@DemoSource(
-    "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/AddPolygonsDemo.java")
+@DemoSource
+@Route(value = "googlemaps/addplygons", layout = GooglemapsDemoView.class)
 @SuppressWarnings("serial")
 public class AddPolygonsDemo extends AbstractGoogleMapsDemo {
 

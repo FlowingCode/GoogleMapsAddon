@@ -3,10 +3,11 @@ package com.flowingcode.vaadin.addons.googlemaps;
 import com.flowingcode.vaadin.addons.demo.DemoSource;
 import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 @PageTitle("Marker Clustering Demo")
-@DemoSource(
-    "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/MarkerClusteringDemo.java")
+@DemoSource
+@Route(value = "googlemaps/markerclustering", layout = GooglemapsDemoView.class)
 @SuppressWarnings("serial")
 public class MarkerClusteringDemo extends AbstractGoogleMapsDemo {
 

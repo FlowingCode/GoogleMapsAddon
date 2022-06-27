@@ -30,16 +30,16 @@ import com.vaadin.flow.router.Route;
 public class GooglemapsDemoView extends TabbedDemo {
 
   public GooglemapsDemoView() {
-    addDemo(new GoogleMapsDemo());
-    addDemo(new AddMarkersDemo());
-    addDemo(new AddPolygonsDemo());
-    addDemo(new GeolocationDemo());
-    addDemo(new DraggableMarkerDemo());
-    addDemo(new DisableUIControlsDemo());
-    addDemo(new CloudBasedMapStylingDemo());
-    addDemo(new ControlSizeDemo());
-    addDemo(new KMLLayerDemo());
-    addDemo(new MarkerClusteringDemo());
+    addDemo(GoogleMapsDemo.class);
+    addDemo(AddMarkersDemo.class);
+    addDemo(AddPolygonsDemo.class);
+    addDemo(GeolocationDemo.class);
+    addDemo(DraggableMarkerDemo.class);
+    addDemo(DisableUIControlsDemo.class);
+    addDemo(CloudBasedMapStylingDemo.class);
+    addDemo(ControlSizeDemo.class);
+    addDemo(KMLLayerDemo.class);
+    addDemo(MarkerClusteringDemo.class);
     setSizeFull();
   }
 }
