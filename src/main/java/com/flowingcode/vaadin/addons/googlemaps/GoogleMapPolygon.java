@@ -39,7 +39,8 @@ import java.util.List;
 @Tag("google-map-poly")
 @JsModule("@flowingcode/google-map/google-map-poly.js")
 @JsModule("@flowingcode/google-map/google-map-point.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.1.0")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.2.0")
+@NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
 public class GoogleMapPolygon extends Component {
 
   private static final double DEFAULT_FILL_OPACITY = 0.5d;
