@@ -22,10 +22,11 @@ package com.flowingcode.vaadin.addons.googlemaps;
 import com.flowingcode.vaadin.addons.demo.DemoSource;
 import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 @PageTitle("KML Demo")
-@DemoSource(
-    "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/KMLLayerDemo.java")
+@DemoSource
+@Route(value = "googlemaps/kml", layout = GooglemapsDemoView.class)
 @SuppressWarnings("serial")
 public class KMLLayerDemo extends AbstractGoogleMapsDemo {
 

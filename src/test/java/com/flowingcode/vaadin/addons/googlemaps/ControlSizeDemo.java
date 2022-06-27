@@ -6,10 +6,11 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 @PageTitle("Control Size Demo")
-@DemoSource(
-    "https://github.com/FlowingCode/GoogleMapsAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/googlemaps/ControlSizeDemo.java")
+@DemoSource
+@Route(value = "googlemaps/controlsize", layout = GooglemapsDemoView.class)
 @SuppressWarnings("serial")
 public class ControlSizeDemo extends AbstractGoogleMapsDemo {
 
