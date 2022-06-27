@@ -357,7 +357,14 @@ public class GoogleMap extends Component implements HasSize {
   public String getKml() {
     return this.getElement().getProperty("kml");
   }
-   
+  
+  /**
+   * Enables markers clustering. 
+   */
+  public void enableMarkersClustering() {
+    this.getElement().setProperty("enableMarkersClustering", true);
+  }
+  
   public static class GoogleMapClickEvent extends ClickEvent<GoogleMap> {
     private final double lat;
     private final double lon;
