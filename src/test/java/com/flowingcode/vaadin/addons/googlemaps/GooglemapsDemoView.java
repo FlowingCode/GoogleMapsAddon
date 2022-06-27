@@ -39,6 +39,7 @@ public class GooglemapsDemoView extends TabbedDemo {
     addDemo(new CloudBasedMapStylingDemo());
     addDemo(new ControlSizeDemo());
     addDemo(new KMLLayerDemo());
+    addDemo(new MarkerClusteringDemo());
     setSizeFull();
   }
 }
