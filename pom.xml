@@ -4,7 +4,7 @@
 
     <groupId>com.flowingcode.vaadin.addons</groupId>
     <artifactId>google-maps</artifactId>
-    <version>1.8.2</version>
+    <version>1.8.3-SNAPSHOT</version>
     <name>Google Maps Addon</name>
     <description>Integration of google-map for Vaadin platform</description>
 
@@ -38,7 +38,7 @@
         <url>https://github.com/FlowingCode/GoogleMapsAddon</url>
         <connection>scm:git:git://github.com/FlowingCode/GoogleMapsAddon.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:/FlowingCode/GoogleMapsAddon.git</developerConnection>
-        <tag>google-maps-1.8.2</tag>
+        <tag>HEAD</tag>
     </scm>
 	
     <dependencyManagement>
