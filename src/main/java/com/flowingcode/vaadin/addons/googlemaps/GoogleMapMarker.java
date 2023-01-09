@@ -48,8 +48,6 @@ public class GoogleMapMarker extends Component {
 
   private boolean animationEnabled = true;
 
-  private boolean optimized = true;
-
   /** Instantiates a new GoogleMapMarker. */
   public GoogleMapMarker() {
     id = idCounter;
@@ -190,25 +188,6 @@ public class GoogleMapMarker extends Component {
    */
   public void setAnimationEnabled(boolean animationEnabled) {
     this.animationEnabled = animationEnabled;
-  }
-
-  /**
-   * Checks if optimization is enabled.
-   *
-   * @return true, if enabled
-   */
-  public boolean isOptimized() {
-    return optimized;
-  }
-
-  /**
-   * Enables/disables marker optimization. If enabled, many markers are rendered as a single static
-   * element. Disable if you want to use animated GIFs or PNGs.
-   *
-   * @param optimized Set true to enable (default true).
-   */
-  public void setOptimized(boolean optimized) {
-    this.optimized = optimized;
   }
 
   public long getIdentifier() {
