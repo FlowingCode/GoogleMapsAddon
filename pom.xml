@@ -478,6 +478,15 @@
 				</plugins>
 			</build>
 		</profile>
+	    
+		<profile>
+			<id>v23</id>
+			<properties>		
+				<vaadin.version>23.3.5</vaadin.version>
+				<maven.compiler.source>11</maven.compiler.source>
+				<maven.compiler.target>11</maven.compiler.target>				
+			</properties>
+		</profile>
     </profiles>
     
 </project>
