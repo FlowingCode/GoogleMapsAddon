@@ -29,7 +29,6 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
-import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -56,7 +55,7 @@ public class AddMarkersDemo extends AbstractGoogleMapsDemo {
     markerColorsMap.put("Orange", Markers.ORANGE);
     markerColorsMap.put("Light blue", Markers.LIGHTBLUE);
     ComboBox<String> colorCB = new ComboBox<>();
-    colorCB.setDataProvider(DataProvider.fromStream(markerColorsMap.keySet().stream()));
+    colorCB.setItems(markerColorsMap.keySet());
     colorCB.setPlaceholder("Marker color");
     Button addMarker =
         new Button(
