@@ -55,7 +55,7 @@ public class AddMarkersDemo extends AbstractGoogleMapsDemo {
     markerColorsMap.put("Orange", Markers.ORANGE);
     markerColorsMap.put("Light blue", Markers.LIGHTBLUE);
     ComboBox<String> colorCB = new ComboBox<>();
-    colorCB.setItems(markerColorsMap.keySet());
+    ReflectionUtil.setItems(colorCB, markerColorsMap.keySet());
     colorCB.setPlaceholder("Marker color");
     Button addMarker =
         new Button(
