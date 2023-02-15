@@ -1,0 +1,8 @@
+name: Check Commits
+
+on: 
+  pull_request:
+
+jobs:
+  check-commits:    
+    uses: FlowingCode/GithubActions/.github/workflows/check-commits.yml@main
