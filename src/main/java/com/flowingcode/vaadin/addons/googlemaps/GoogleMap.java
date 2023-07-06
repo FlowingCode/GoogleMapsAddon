@@ -42,7 +42,7 @@ import org.apache.commons.lang3.StringUtils;
 @SuppressWarnings("serial")
 @Tag("google-map")
 @JsModule("@flowingcode/google-map/google-map.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.2.3")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.2.4")
 @NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
 @JsModule("./googlemaps/geolocation.js")
 public class GoogleMap extends Component implements HasSize {
@@ -492,5 +492,5 @@ public class GoogleMap extends Component implements HasSize {
       ComponentEventListener<GeolocationErrorEvent> listener) {
     return addListener(GeolocationErrorEvent.class, listener);
   }
-  
+ 
 }
