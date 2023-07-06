@@ -8,3 +8,5 @@
 /.classpath
 /.project
 /node
+tsconfig.json
+types.d.ts
