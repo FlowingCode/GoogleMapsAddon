@@ -43,6 +43,7 @@ public class GooglemapsDemoView extends TabbedDemo {
     addDemo(ControlSizeDemo.class);
     addDemo(KMLLayerDemo.class);
     addDemo(MarkerClusteringDemo.class);
+    addDemo(TiltAndRotationDemo.class);
     setSizeFull();
   }
 }
