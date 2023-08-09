@@ -40,6 +40,14 @@
         <developerConnection>scm:git:ssh://git@github.com:/FlowingCode/GoogleMapsAddon.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
+    
+    <developers>
+	    <developer>
+		      <id>flowingcode</id>
+		      <organization>Flowing Code</organization>
+		      <organizationUrl>https://www.flowingcode.com</organizationUrl>
+	    </developer>
+    </developers>
 	
     <dependencyManagement>
         <dependencies>
