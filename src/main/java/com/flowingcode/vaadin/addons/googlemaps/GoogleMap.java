@@ -365,6 +365,42 @@ public class GoogleMap extends Component implements HasSize {
   public void enableMarkersClustering() {
     this.getElement().setProperty("enableMarkersClustering", true);
   }
+    
+  /**
+   * Sets tilt value on a vector map.
+   * 
+   * @param tilt the value to set
+   */
+  public void setTilt(double tilt) {
+    this.getElement().setProperty("tilt", tilt);
+  }
+  
+  /**
+   * Returns current tilt value.
+   * 
+   * @return tilt value
+   */
+  public double getTilt() {
+    return this.getElement().getProperty("tilt", 45d);
+  }
+  
+  /**
+   * Sets heading (rotation) value on a vector map.
+   * 
+   * @param heading the value to set
+   */
+  public void setHeading(double heading) {
+    this.getElement().setProperty("heading", heading);
+  }
+  
+  /**
+   * Returns the current heading value.
+   * 
+   * @return haeading value
+   */
+  public double getHeading() {
+    return this.getElement().getProperty("heading", 0d);
+  }
   
   public static class GoogleMapClickEvent extends ClickEvent<GoogleMap> {
     private final double lat;
