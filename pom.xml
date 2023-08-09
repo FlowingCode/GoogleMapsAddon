@@ -142,7 +142,7 @@
 		<dependency>
 			<groupId>com.flowingcode.vaadin.addons.demo</groupId>
 			<artifactId>commons-demo</artifactId>
-			<version>3.5.0</version>
+			<version>3.7.1</version>
 			<scope>test</scope>
 		</dependency>
     </dependencies>
