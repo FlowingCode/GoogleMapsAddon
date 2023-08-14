@@ -20,6 +20,7 @@
 
 package com.flowingcode.vaadin.addons.googlemaps;
 
+
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
@@ -291,4 +292,54 @@ public class GoogleMapMarker extends Component {
     this.getElement().setProperty("clickEvents", true);
     return addListener(GoogleMapMarkerClickEvent.class, listener);
   }
+  
+  /**
+   * Event called on marker's right click.
+   */
+  @DomEvent("google-map-marker-rightclick")
+  public static class GoogleMapMarkerRightClickEvent extends ClickEvent<GoogleMapMarker> {
+
+    private final double lat;
+    private final double lon;
+
+    public GoogleMapMarkerRightClickEvent(GoogleMapMarker source, boolean fromClient,
+        @EventData("event.detail.domEvent.screenX") int screenX,
+        @EventData("event.detail.domEvent.screenY") int screenY,
+        @EventData("event.detail.domEvent.clientX") int clientX,
+        @EventData("event.detail.domEvent.clientY") int clientY,
+        @EventData("event.detail.domEvent.detail") int clickCount,
+        @EventData("event.detail.domEvent.button") int button,
+        @EventData("event.detail.domEvent.ctrlKey") boolean ctrlKey,
+        @EventData("event.detail.domEvent.shiftKey") boolean shiftKey,
+        @EventData("event.detail.domEvent.altKey") boolean altKey,
+        @EventData("event.detail.domEvent.metaKey") boolean metaKey,
+        @EventData(value = "event.detail.latLng") JsonValue latLng) {
+      super(source, fromClient, screenX, screenY, clientX, clientY, clickCount, button, ctrlKey,
+          shiftKey, altKey, metaKey);
+      this.lat = ((JsonObject) latLng).getNumber("lat");
+      this.lon = ((JsonObject) latLng).getNumber("lng");
+    }
+
+    public double getLatitude() {
+      return this.lat;
+    }
+
+    public double getLongitude() {
+      return this.lon;
+    }
+  }
+
+  /**
+   * Adds a right click event listener to a marker.
+   * 
+   * @param listener a right click event listener
+   * @return a handle for the listener
+   */
+  public Registration addRightClickListener(
+      ComponentEventListener<GoogleMapMarkerRightClickEvent> listener) {
+    this.getElement().setProperty("clickable", true);
+    this.getElement().setProperty("clickEvents", true);
+    return addListener(GoogleMapMarkerRightClickEvent.class, listener);
+  }
+
 }
