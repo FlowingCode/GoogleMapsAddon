@@ -39,7 +39,7 @@ import elemental.json.JsonValue;
 @SuppressWarnings("serial")
 @Tag("google-map-marker")
 @JsModule("@flowingcode/google-map/google-map-marker.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.3.0")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.4.0")
 @NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
 public class GoogleMapMarker extends Component {
 
@@ -48,8 +48,6 @@ public class GoogleMapMarker extends Component {
   private long id;
 
   private boolean animationEnabled = true;
-
-  private boolean optimized = true;
 
   /** Instantiates a new GoogleMapMarker. */
   public GoogleMapMarker() {
@@ -199,7 +197,7 @@ public class GoogleMapMarker extends Component {
    * @return true, if enabled
    */
   public boolean isOptimized() {
-    return optimized;
+    return this.getElement().getProperty("optimized", false);
   }
 
   /**
@@ -209,7 +207,7 @@ public class GoogleMapMarker extends Component {
    * @param optimized Set true to enable (default true).
    */
   public void setOptimized(boolean optimized) {
-    this.optimized = optimized;
+    this.getElement().setProperty("optimized", optimized);
   }
 
   public long getIdentifier() {
