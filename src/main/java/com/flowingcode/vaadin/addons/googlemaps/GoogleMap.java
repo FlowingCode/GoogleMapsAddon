@@ -37,6 +37,7 @@ import com.vaadin.flow.shared.Registration;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import org.apache.commons.lang3.StringUtils;
 
 @SuppressWarnings("serial")
@@ -528,5 +529,16 @@ public class GoogleMap extends Component implements HasSize {
       ComponentEventListener<GeolocationErrorEvent> listener) {
     return addListener(GeolocationErrorEvent.class, listener);
   }
- 
+  
+  /**
+   * Returns a {@link CompletableFuture} containing the map current {@link LatLonBounds bounds}.
+   * 
+   * @return current {@link LatLonBounds bounds}
+   */
+  public CompletableFuture<LatLonBounds> getBounds() {    
+    return this.getElement().executeJs("return this.map.getBounds()")
+        .toCompletableFuture(JsonObject.class).thenApply(result -> {
+          return new LatLonBounds(result);
+        });
+  }
 }
