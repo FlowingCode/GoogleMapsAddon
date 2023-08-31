@@ -61,7 +61,7 @@ Contributions are welcome, but there are no guarantees that they are accepted as
 
 As first step, please refer to our [Development Conventions](https://github.com/FlowingCode/DevelopmentConventions) page to find information about Conventional Commits & Code Style requeriments.
 
-Then, follow these steps for creating a contibution:
+Then, follow these steps for creating a contribution:
 
 - Fork this project.
 - Create an issue to this project about the contribution (bug or feature) if there is no such issue about it already. Try to keep the scope minimal.
