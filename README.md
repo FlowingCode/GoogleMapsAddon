@@ -1,18 +1,31 @@
+[![Published on Vaadin Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/google-maps-addon)
+[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/google-maps-addon.svg)](https://vaadin.com/directory/component/google-maps-addon)
 [![Build Status](https://jenkins.flowingcode.com/job/GoogleMaps-14-addon/badge/icon)](https://jenkins.flowingcode.com/job/GoogleMaps-14-addon)
 
 # Google Maps Add-on
 
-Vaadin 14+ addon for Google Maps Web Component
+Vaadin Flow add-on for [Google Maps Web Component](https://github.com/FlowingCode/google-map).
 
 ## Features
 
 * Programmatic server-side panning and zooming
-* Adding/removing markers
-* Adding/removing polygons  
+* Add/remove markers
+* Add/remove polygons  
+* Show info window on markers
+* Geolocation
+* Add draggable markers
+* Define clustering for markers
+* Enable/disable UI controls
+* Define size of UI controls
+* Kml support
+* Tilt & rotation support
+* MapId support
+* Obtain map bounds
+* & more
 
 ## Online demo
 
-[Online demo here](http://addonsv14.flowingcode.com/googlemaps)
+[Online demo here](http://addonsv24.flowingcode.com/googlemaps)
 
 ## Download release
 
@@ -74,7 +87,7 @@ Then, follow these steps for creating a contribution:
 
 This add-on is distributed under Apache License 2.0. For license terms, see LICENSE.txt.
 
-GoogleMapsAddon is written by Flowing Code S.A.
+Google Maps Add-on is written by Flowing Code S.A.
 
 # Developer Guide
 
@@ -95,7 +108,7 @@ gmp.addClickListener(ev->Notification.show("polygon clicked"));
 
 ## Special configuration when using Spring
 
-By default, Vaadin Flow only includes ```com/vaadin/flow/component``` to be always scanned for UI components and views. For this reason, the addon might need to be whitelisted in order to display correctly. 
+By default, Vaadin Flow only includes ```com/vaadin/flow/component``` to be always scanned for UI components and views. For this reason, the add-on might need to be whitelisted in order to display correctly. 
 
 To do so, just add ```com.flowingcode``` to the ```vaadin.whitelisted-packages``` property in ```src/main/resources/application.properties```, like:
 
