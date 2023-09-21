@@ -43,7 +43,7 @@ import org.apache.commons.lang3.StringUtils;
 @SuppressWarnings("serial")
 @Tag("google-map")
 @JsModule("@flowingcode/google-map/google-map.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.4.0")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.5.0")
 @NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
 @JsModule("./googlemaps/geolocation.js")
 public class GoogleMap extends Component implements HasSize {
@@ -540,5 +540,17 @@ public class GoogleMap extends Component implements HasSize {
         .toCompletableFuture(JsonObject.class).thenApply(result -> {
           return new LatLonBounds(result);
         });
+  }
+  
+  /**
+   * Sets the custom renderer definition to be applied to the markers clustering. The custom
+   * renderer needs to be define as a global JavaScript object conforming the Renderer interface
+   * from
+   * https://github.com/googlemaps/js-markerclusterer/blob/5ac92567dd0c52a1e1b897d791463a064656830c/src/renderer.ts#L65C2-L65C78
+   * 
+   * @param customRenderer the custom renderer definition
+   */
+  public void setClusteringRenderer(String customRenderer) {
+    this.getElement().setProperty("customRenderer", customRenderer);
   }
 }
