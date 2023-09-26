@@ -27,6 +27,9 @@ import com.vaadin.flow.router.Route;
 
 @PageTitle("Clustering With Custom Renderer Demo")
 @DemoSource
+@DemoSource(
+    value = "/src/test/resources/META-INF/resources/frontend/src/clustering-custom-renderer-example.js",
+    caption = "clustering-custom-renderer-example.js")
 @Route(value = "googlemaps/clustering-custom-renderer", layout = GooglemapsDemoView.class)
 @JsModule("./src/clustering-custom-renderer-example.js")
 @SuppressWarnings("serial")
