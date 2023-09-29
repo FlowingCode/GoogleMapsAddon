@@ -20,17 +20,25 @@
 
 package com.flowingcode.vaadin.addons.googlemaps;
 
+import com.flowingcode.vaadin.addons.demo.DemoSource;
+import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
+import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
+import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import com.flowingcode.vaadin.addons.demo.DemoSource;
-import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.orderedlayout.FlexLayout;
-import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
 
 @PageTitle("Add Markers Demo")
 @DemoSource
@@ -54,23 +62,62 @@ public class AddMarkersDemo extends AbstractGoogleMapsDemo {
     markerColorsMap.put("Yellow", Markers.YELLOW);
     markerColorsMap.put("Orange", Markers.ORANGE);
     markerColorsMap.put("Light blue", Markers.LIGHTBLUE);
-    ComboBox<String> colorCB = new ComboBox<>();
+    
+    ComboBox<String> colorCB = new ComboBox<>("Color");
     ReflectionUtil.setItems(colorCB, markerColorsMap.keySet());
-    colorCB.setPlaceholder("Marker color");
+    colorCB.setPlaceholder("Choose color");
+    
+    Checkbox draggable = new Checkbox("Draggable");    
+    Checkbox withRightClick = new Checkbox("Right Click");
+        
     Button addMarker =
         new Button(
             "Add Marker",
             ev -> {
               String markerColor =
                   Optional.ofNullable(markerColorsMap.get(colorCB.getValue())).orElse("");
-              gmaps.addMarker("New Marker", gmaps.getCenter(), true, markerColor);
+              Boolean isDraggable = draggable.getValue();
+              GoogleMapMarker marker =
+                  new GoogleMapMarker("New Marker", gmaps.getCenter(), isDraggable, markerColor);
+
+              if (isDraggable) {
+                marker.addDragEndEventListener(e -> Notification.show("Dragged to -> Latitude: "
+                    + e.getLatitude() + " - Longitude: " + e.getLongitude()));
+              }
+
+              if (withRightClick.getValue()) {
+                marker.addRightClickListener(e -> {
+                  Div text = new Div(new Text("Alt key: " + e.isAltKey()), new HtmlComponent("br"),
+                      new Text("Shift key: " + e.isShiftKey()), new HtmlComponent("br"),
+                      new Text("Ctrol key: " + e.isCtrlKey()), new HtmlComponent("br"),
+                      new Text("Click counts: " + e.getClickCount()), new HtmlComponent("br"),
+                      new Text("Latitude: " + e.getLatitude()), new HtmlComponent("br"),
+                      new Text("Longitude: " + e.getLongitude()));
+
+                  Notification notification = new Notification();
+
+                  Button closeButton = new Button(new Icon(VaadinIcon.CLOSE_SMALL));
+                  closeButton.addClickListener(event -> {
+                    notification.close();
+                  });
+
+                  HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+                  layout.setAlignItems(Alignment.CENTER);
+
+                  notification.add(layout);
+                  notification.open();
+                });
+              }
+              gmaps.addMarker(marker);
             });
 
     FlexLayout layout = new FlexLayout();
-    layout.setFlexWrap(FlexWrap.WRAP);
-    addMarker.addClassName("margin-button");
-    colorCB.addClassName("margin-button");
-    layout.add(addMarker, colorCB);
+    layout.setFlexWrap(FlexWrap.WRAP); // hide-source
+    addMarker.addClassName("margin-button"); // hide-source
+    colorCB.addClassName("margin-button"); // hide-source
+    layout.add(colorCB, draggable, withRightClick, addMarker);
+    layout.setAlignItems(Alignment.BASELINE); // hide-source
+    layout.getStyle().set("margin-top", "0"); // hide-source
     add(gmaps, layout);
   }
 }
