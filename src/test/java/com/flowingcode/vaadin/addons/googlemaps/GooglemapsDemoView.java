@@ -37,14 +37,12 @@ public class GooglemapsDemoView extends TabbedDemo {
     addDemo(AddMarkersDemo.class);
     addDemo(AddPolygonsDemo.class);
     addDemo(GeolocationDemo.class);
-    addDemo(DraggableMarkerDemo.class);
     addDemo(DisableUIControlsDemo.class);
     addDemo(CloudBasedMapStylingDemo.class);
     addDemo(ControlSizeDemo.class);
     addDemo(KMLLayerDemo.class);
     addDemo(MarkerClusteringDemo.class);
     addDemo(TiltAndRotationDemo.class);
-    addDemo(RightClickOnMarkersDemo.class);
     addDemo(ClusteringWithCustomRendererDemo.class);
     setSizeFull();
   }
