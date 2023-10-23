@@ -44,7 +44,7 @@ import org.apache.commons.lang3.StringUtils;
 @SuppressWarnings("serial")
 @Tag("google-map")
 @JsModule("@flowingcode/google-map/google-map.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.6.0")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.6.1")
 @NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
 @JsModule("./googlemaps/geolocation.js")
 public class GoogleMap extends Component implements HasSize {
@@ -176,6 +176,8 @@ public class GoogleMap extends Component implements HasSize {
   @SuppressWarnings("squid:S3242")
   public void removeMarker(GoogleMapMarker marker) {
     this.getElement().removeChild(marker.getElement());
+    // markers need to be updated on removal
+    this.getElement().executeJs("this._updateMarkers()");
   }
 
   /**
