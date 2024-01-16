@@ -160,6 +160,21 @@ public class GoogleMap extends Component implements HasSize {
   public void removePolygon(GoogleMapPolygon polygon) {
     this.getElement().removeChild(polygon.getElement());
   }
+  
+  public GoogleMapPolyline addPolyline(List<GoogleMapPoint> points) {
+    GoogleMapPolyline polyline = new GoogleMapPolyline(points);
+    this.getElement().appendChild(polyline.getElement());
+    return polyline;
+  }
+
+  public void addPolyline(GoogleMapPolyline polyline) {
+    this.getElement().appendChild(polyline.getElement());
+  }
+
+  @SuppressWarnings("squid:S3242")
+  public void removePolyline(GoogleMapPolyline polyline) {
+    this.getElement().removeChild(polyline.getElement());
+  }
 
   /**
    * Adds a marker to the map.
