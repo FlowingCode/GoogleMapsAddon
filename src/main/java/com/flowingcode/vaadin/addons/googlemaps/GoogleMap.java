@@ -35,6 +35,8 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.dom.DebouncePhase;
 import com.vaadin.flow.dom.DomListenerRegistration;
 import com.vaadin.flow.shared.Registration;
+import elemental.json.Json;
+import elemental.json.JsonArray;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
 import java.util.List;
@@ -44,7 +46,7 @@ import org.apache.commons.lang3.StringUtils;
 @SuppressWarnings("serial")
 @Tag("google-map")
 @JsModule("@flowingcode/google-map/google-map.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.6.1")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.7.1")
 @NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
 @JsModule("./googlemaps/geolocation.js")
 public class GoogleMap extends Component implements HasSize {
@@ -625,5 +627,20 @@ public class GoogleMap extends Component implements HasSize {
       return bounds;
     }
   }
-
+  
+  /**
+   * Adds custom control buttons to the map.
+   * 
+   * @param customControls list of custom controls to add to the map
+   */
+  public void addCustomControls(CustomControl... customControls) {
+    JsonArray jsonArray = Json.createArray();
+    for (int i = 0; i < customControls.length; i++) {
+      CustomControl customControl = customControls[i];
+      jsonArray.set(i, customControl.getJson(i));
+      customControl.getControlButton().getElement().setAttribute("slot", "customControlSlot_" + i);
+      this.getElement().appendChild(customControl.getControlButton().getElement());
+    }
+    this.getElement().setPropertyJson("customControls", jsonArray);
+  }
 }
