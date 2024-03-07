@@ -80,7 +80,9 @@ public class GoogleMapsDemo extends AbstractGoogleMapsDemo {
                 new GoogleMapPoint(gmaps.getCenter().getLat() - 1, gmaps.getCenter().getLon()),
                 new GoogleMapPoint(gmaps.getCenter().getLat(), gmaps.getCenter().getLon() + 1)));
     gmp.setClosed(false);
-    gmp.setIcons(new Icon("M -2,0 0,-2 2,0 0,2 z", "#F00", "#FF0", 1, 25));
+
+    gmp.setIcons(new IconSequence(new Symbol("M -2,0 0,-2 2,0 0,2 z", "#F00", "#FF0", 1.0), "25px"));
+    
     gmp.addClickListener(e -> Notification.show("Polygon clicked"));
 
     // add button to show center coordinates

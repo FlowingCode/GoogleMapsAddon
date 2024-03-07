@@ -139,11 +139,29 @@ public class GoogleMap extends Component implements HasSize {
    * @param position Coordinates of the marker on the map.
    * @param draggable Set true to enable dragging of the marker.
    * @param iconUrl The url of the icon of the marker.
+   * 
    * @return GoogleMapMarker object created with the given settings.
    */
   public GoogleMapMarker addMarker(
       String caption, LatLon position, boolean draggable, String iconUrl) {
     GoogleMapMarker gmm = new GoogleMapMarker(caption, position, draggable, iconUrl);
+    addMarker(gmm);
+    return gmm;
+  }
+  
+  /**
+   * Adds a new marker to the map.
+   *
+   * @param caption Caption of the marker shown when the marker is hovered.
+   * @param position Coordinates of the marker on the map.
+   * @param draggable Set true to enable dragging of the marker.
+   * @param icon the icon image of the marker.
+   * 
+   * @return GoogleMapMarker object created with the given settings.
+   */
+  public GoogleMapMarker addMarker(
+      String caption, LatLon position, boolean draggable, GoogleMapIcon icon) {
+    GoogleMapMarker gmm = new GoogleMapMarker(caption, position, draggable, icon);
     addMarker(gmm);
     return gmm;
   }

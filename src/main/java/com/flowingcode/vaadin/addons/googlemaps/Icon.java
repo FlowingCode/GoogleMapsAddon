@@ -24,53 +24,20 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 import java.util.Optional;
 
-public class Icon {
+/**
+ * @deprecated, use {@link IconSequence} instead.
+ */
+@Deprecated
+public class Icon extends Symbol {
 
-  private String path;
-  private String strokeColor;
-  private String fillColor;
-  private int fillOpacity;
   private int repeat;
 
   public Icon(String path, String strokeColor, String fillColor, int fillOpacity, int repeat) {
-    super();
-    this.path = path;
-    this.strokeColor = strokeColor;
-    this.fillColor = fillColor;
-    this.fillOpacity = fillOpacity;
+    super(path);
+    this.setStrokeColor(strokeColor);
+    this.setFillColor(fillColor);
+    this.setFillOpacity(Double.valueOf(fillOpacity));
     this.repeat = repeat;
-  }
-
-  public String getPath() {
-    return path;
-  }
-
-  public void setPath(String path) {
-    this.path = path;
-  }
-
-  public String getStrokeColor() {
-    return strokeColor;
-  }
-
-  public void setStrokeColor(String strokeColor) {
-    this.strokeColor = strokeColor;
-  }
-
-  public String getFillColor() {
-    return fillColor;
-  }
-
-  public void setFillColor(String fillColor) {
-    this.fillColor = fillColor;
-  }
-
-  public int getFillOpacity() {
-    return fillOpacity;
-  }
-
-  public void setFillOpacity(int fillOpacity) {
-    this.fillOpacity = fillOpacity;
   }
 
   public int getRepeat() {
@@ -81,16 +48,12 @@ public class Icon {
     this.repeat = repeat;
   }
 
-  protected JsonObject getJson() {
-    JsonObject options = Json.createObject();
-    Optional.ofNullable(getPath()).ifPresent(value -> options.put("path", value));
-    Optional.ofNullable(getStrokeColor()).ifPresent(value -> options.put("strokeColor", value));
-    Optional.ofNullable(getFillColor()).ifPresent(value -> options.put("fillColor", value));
-    Optional.ofNullable(getFillOpacity()).ifPresent(value -> options.put("fillOpacity", value));
-        
+  @Override
+  public JsonObject getJson() {
     JsonObject js = Json.createObject();
-    js.put("icon", options);
+    JsonObject iconJs = super.getJson();
+    js.put("icon", iconJs);
     Optional.ofNullable(getRepeat()).ifPresent(v -> js.put("repeat", v + "px"));
-    return js;    
+    return js;
   }
 }
