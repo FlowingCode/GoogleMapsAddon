@@ -181,6 +181,10 @@ public abstract class GoogleMapPoly extends Component {
     return addListener(GoogleMapPolyClickEvent.class, listener);
   }
 
+  /**
+   * @deprecated, use {@link #setIcons(IconSequence...)} instead.
+   */
+  @Deprecated
   public void setIcons(Icon... icons) {
     JsonArray jsonArray = Json.createArray();
     for (int i = 0; i < icons.length; i++) {
@@ -188,4 +192,18 @@ public abstract class GoogleMapPoly extends Component {
     }   
     this.getElement().setPropertyJson("icons", jsonArray);
   }
+  
+  /**
+   * Set icons to the polygon/polyline.
+   * 
+   * @param icons the icons to set
+   */
+  public void setIcons(IconSequence... icons) {
+    JsonArray jsonArray = Json.createArray();
+    for (int i = 0; i < icons.length; i++) {
+      jsonArray.set(i, icons[i].getJson());
+    }   
+    this.getElement().setPropertyJson("icons", jsonArray);
+  }
+  
 }

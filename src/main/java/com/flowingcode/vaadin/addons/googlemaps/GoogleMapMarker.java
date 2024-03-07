@@ -76,12 +76,26 @@ public class GoogleMapMarker extends Component {
    * @param caption The caption to use.
    * @param position The position of the marker
    * @param draggable Can marker be dragged?
+   * @param iconUrl the icon url as a string
    */
   public GoogleMapMarker(String caption, LatLon position, boolean draggable, String iconUrl) {
     this(caption, position, draggable);
     this.setIconUrl(iconUrl);
   }
-
+  
+  /**
+   * Instantiates a new GoogleMapMarker
+   *
+   * @param caption The caption to use.
+   * @param position The position of the marker
+   * @param draggable Can marker be dragged?
+   * @param icon the icon image for the marker 
+   */
+  public GoogleMapMarker(String caption, LatLon position, boolean draggable, GoogleMapIcon icon) {
+    this(caption, position, draggable);
+    this.setIcon(icon);
+  }
+  
   public void addInfoWindow(String htmlContent) {
     this.getElement().setProperty("innerHTML", htmlContent);
   }
@@ -171,6 +185,15 @@ public class GoogleMapMarker extends Component {
    */
   public void setIconUrl(String iconUrl) {
     this.getElement().setProperty("icon", iconUrl);
+  }
+  
+  /**
+   * Sets the icon image of the marker
+   * 
+   * @param icon the icon image of the marker
+   */
+  public void setIcon(GoogleMapIcon icon) {
+    this.getElement().setPropertyJson("icon", icon.getJson());
   }
 
   /**
