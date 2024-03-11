@@ -150,32 +150,40 @@ public class GoogleMap extends Component implements HasSize {
 
   public GoogleMapPolygon addPolygon(List<GoogleMapPoint> points) {
     GoogleMapPolygon polygon = new GoogleMapPolygon(points);
-    this.getElement().appendChild(polygon.getElement());
+    addPolygon(polygon);    
     return polygon;
   }
 
   public void addPolygon(GoogleMapPolygon polygon) {
     this.getElement().appendChild(polygon.getElement());
+    if (this.getElement().getParent() != null) {
+      this.getElement().executeJs("this._updateObjects()");
+    }
   }
 
   @SuppressWarnings("squid:S3242")
   public void removePolygon(GoogleMapPolygon polygon) {
     this.getElement().removeChild(polygon.getElement());
+    this.getElement().executeJs("this._updateObjects()");
   }
   
   public GoogleMapPolyline addPolyline(List<GoogleMapPoint> points) {
     GoogleMapPolyline polyline = new GoogleMapPolyline(points);
-    this.getElement().appendChild(polyline.getElement());
+    addPolyline(polyline);
     return polyline;
   }
 
   public void addPolyline(GoogleMapPolyline polyline) {
     this.getElement().appendChild(polyline.getElement());
+    if (this.getElement().getParent() != null) {
+      this.getElement().executeJs("this._updateObjects()");
+    }
   }
 
   @SuppressWarnings("squid:S3242")
   public void removePolyline(GoogleMapPolyline polyline) {
     this.getElement().removeChild(polyline.getElement());
+    this.getElement().executeJs("this._updateObjects()");
   }
 
   /**
