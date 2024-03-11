@@ -148,12 +148,24 @@ public class GoogleMap extends Component implements HasSize {
     return gmm;
   }
 
+  /**
+   * Creates a polygon with the given points and adds the new polygon to the map.
+   * 
+   * @param points the points of the polygon
+   * 
+   * @return the new created polygon
+   */
   public GoogleMapPolygon addPolygon(List<GoogleMapPoint> points) {
     GoogleMapPolygon polygon = new GoogleMapPolygon(points);
     addPolygon(polygon);    
     return polygon;
   }
 
+  /**
+   * Adds a new polygon to the map.
+   * 
+   * @param polygon the polygon to be added to the map
+   */
   public void addPolygon(GoogleMapPolygon polygon) {
     this.getElement().appendChild(polygon.getElement());
     if (this.getElement().getParent() != null) {
@@ -161,18 +173,35 @@ public class GoogleMap extends Component implements HasSize {
     }
   }
 
+  /**
+   * Removes a polygon from the map.
+   * 
+   * @param polygon the polygon to be removed from the map
+   */
   @SuppressWarnings("squid:S3242")
   public void removePolygon(GoogleMapPolygon polygon) {
     this.getElement().removeChild(polygon.getElement());
     this.getElement().executeJs("this._updateObjects()");
   }
   
+  /**
+   * Creates a polyline with the given points and adds the new polyline to the map.
+   * 
+   * @param points the points of the polyline
+   * 
+   * @return the new created polyline
+   */
   public GoogleMapPolyline addPolyline(List<GoogleMapPoint> points) {
     GoogleMapPolyline polyline = new GoogleMapPolyline(points);
     addPolyline(polyline);
     return polyline;
   }
 
+  /**
+   * Adds a new polyline to the map.
+   * 
+   * @param polyline the polyline to be added to the map
+   */
   public void addPolyline(GoogleMapPolyline polyline) {
     this.getElement().appendChild(polyline.getElement());
     if (this.getElement().getParent() != null) {
@@ -180,6 +209,11 @@ public class GoogleMap extends Component implements HasSize {
     }
   }
 
+  /**
+   * Removes a polyline from the map.
+   * 
+   * @param polyline the polyline to be removed from the map
+   */
   @SuppressWarnings("squid:S3242")
   public void removePolyline(GoogleMapPolyline polyline) {
     this.getElement().removeChild(polyline.getElement());
