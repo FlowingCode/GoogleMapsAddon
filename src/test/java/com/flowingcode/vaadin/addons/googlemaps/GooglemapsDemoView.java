@@ -46,6 +46,7 @@ public class GooglemapsDemoView extends TabbedDemo {
     addDemo(ClusteringWithCustomRendererDemo.class);
     addDemo(PolylinesDemo.class);
     addDemo(CustomizedMarkerIconsDemo.class);
+    addDemo(TrackLocationDemo.class);
     setSizeFull();
   }
 }

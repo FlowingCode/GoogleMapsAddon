@@ -20,20 +20,46 @@
 window.geolocation = {
 
 	get: function(map) {
-    // if browser supports geolocation, return current location
-    if(navigator.geolocation) {
+		// if browser supports geolocation, return current location
+		if (navigator.geolocation) {
 
-      navigator.geolocation.getCurrentPosition(
-      position => {
-        map.$server.handleGeolocation(position.coords.latitude, position.coords.longitude);
-      },
-      () => {
-        map.$server.handleGeolocationError(true);
-      });      
-    
-    } else { // browser doesn't support geolocation
-      map.$server.handleGeolocationError(false);
-    }
-  }
+			navigator.geolocation.getCurrentPosition(
+				position => {
+					map.$server.handleGeolocation(position.coords.latitude, position.coords.longitude);
+				}, 
+				() => {
+					this._handleGeolocationError(true, map);
+				}
+			);
 
+		} else { // browser doesn't support geolocation
+			this._handleGeolocationError(false, map);
+		}
+	},
+	
+	trackLocation: function(map) {
+		let trackLocationId;
+		if (navigator.geolocation) {
+
+			trackLocationId = navigator.geolocation.watchPosition(
+				position => {
+					map.$server.handleGeolocation(position.coords.latitude, position.coords.longitude);
+				}, 
+				() => {
+					this._handleGeolocationError(true, map);
+				}
+			);
+		} else { // browser doesn't support geolocation
+			this._handleGeolocationError(false, map);
+		}
+		return trackLocationId;
+	},
+	
+	clearTracking: function(id) {
+		navigator.geolocation.clearWatch(id);
+	},
+
+	_handleGeolocationError(error, map){
+		map.$server.handleGeolocationError(error);
+	}
 }
