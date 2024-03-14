@@ -609,6 +609,61 @@ public class GoogleMap extends Component implements HasSize {
       ComponentEventListener<GeolocationErrorEvent> listener) {
     return addListener(GeolocationErrorEvent.class, listener);
   }
+
+  /**
+   * Activates tracking current location on map.
+   * 
+   * <p>Uses <a href=
+   * "https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition">geolocation#watchPosition</a>
+   * method to track current position.</p>
+   * 
+   * <p>Geolocation requires that the user gives consent to location sharing when prompted by the
+   * browser.</p>
+   */
+  public void trackLocation() {
+    getElement().executeJs("return geolocation.trackLocation($0)", this).then(Integer.class,
+        trackLocationId -> {
+          ComponentUtil.fireEvent(this,
+              new LocationTrackingActivatedEvent(this, false, trackLocationId));
+        });
+  }
+  
+  /** Event that is fired when activating location tracking. */
+  public class LocationTrackingActivatedEvent extends ComponentEvent<GoogleMap> {
+
+    private Integer trackLocationId;
+
+    public LocationTrackingActivatedEvent(GoogleMap source, boolean fromClient,
+        Integer trackLocationId) {
+      super(source, fromClient);
+      this.trackLocationId = trackLocationId;
+    }
+
+    public Integer getTrackLocationId() {
+      return trackLocationId;
+    }
+  }
+  
+  /**
+   * Adds a LocationTrackingActivatedEvent listener. The listener is called when setting activating
+   * tracking location.
+   *
+   * @param listener a listener for a LocationTrackingActivatedEvent
+   * @return a handle for the listener
+   */
+  public Registration addLocationTrackingActivatedEventListener(
+      ComponentEventListener<LocationTrackingActivatedEvent> listener) {
+    return addListener(LocationTrackingActivatedEvent.class, listener);
+  }
+  
+  /**
+   * Stops location tracking.
+   * 
+   * @param trackLocationId the id of the current activated location tracking
+   */
+  public void stopTrackLocation(Integer trackLocationId) {
+    getElement().executeJs("geolocation.clearTracking($0)", trackLocationId);
+  }
   
   /**
    * Returns a {@link CompletableFuture} containing the map current {@link LatLonBounds bounds}.
