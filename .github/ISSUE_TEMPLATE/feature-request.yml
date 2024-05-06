@@ -1,0 +1,24 @@
+name: Feature Request
+description: Please add feature suggestions related to Google Maps add-on here.
+body:
+  - type: textarea
+    id: feature-proposal
+    attributes:
+      label: Feature proposal
+      description: A concise but detailed description of the feature that you would like to see in the add-on.
+    validations:
+      required: true
+  - type: textarea
+    id: feature-implementation
+    attributes:
+      label: Describe solution expectations
+      description: Do you have an idea/expectations of how it could be implemented? Did you try a possible solution that you want to share? 
+    validations:
+      required: false
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional information
+      description: Add any extra information you think it might be relevant to the request.
+    validations:
+      required: false

@@ -1,0 +1,47 @@
+name: Bug Report
+description: Please report issues related to Google Maps add-on here.
+body:
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Describe the bug
+      description: A clear description of the issue you're experiencing.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of the expected behavior.
+    validations:
+      required: false
+  - type: textarea
+    id: minimal-reproduction
+    attributes:
+      label: Minimal reproducible example
+      description: If possible, add a concise code snippet that reproduces the issue and describe the steps needed to follow to reproduce it.
+    validations:
+      required: false
+  - type: input
+    id: addon-version
+    attributes:
+      label: Add-on Version
+      description: The version of the add-on on which you're experiencing the issue.   
+    validations:
+      required: true
+  - type: input
+    id: vaadin-version
+    attributes:
+      label: Vaadin Version
+      description: The complete Vaadin version (X.Y.Z) on which the issue is reproducible.     
+    validations:
+      required: true
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional information
+      description: "Any other context/information about the issue can be added here (browser, OS, etc.)." 
+    validations:
+      required: false
+ 
+ 
