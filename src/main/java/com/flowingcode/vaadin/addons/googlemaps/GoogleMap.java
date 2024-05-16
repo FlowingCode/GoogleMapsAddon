@@ -747,8 +747,27 @@ public class GoogleMap extends Component implements HasSize {
    * Adds custom control buttons to the map.
    * 
    * @param customControls list of custom controls to add to the map
+   * 
+   * @deprecated {@link #setCustomControls(CustomControl... customControls)} should be used instead.
    */
+  @Deprecated
   public void addCustomControls(CustomControl... customControls) {
+    JsonArray jsonArray = Json.createArray();
+    for (int i = 0; i < customControls.length; i++) {
+      CustomControl customControl = customControls[i];
+      jsonArray.set(i, customControl.getJson(i));
+      customControl.getControlButton().getElement().setAttribute("slot", "customControlSlot_" + i);
+      this.getElement().appendChild(customControl.getControlButton().getElement());
+    }
+    this.getElement().setPropertyJson("customControls", jsonArray);
+  }
+  
+  /**
+   * Sets the custom control buttons to be displayed in the map.
+   * 
+   * @param customControls list of custom controls to add to the map
+   */
+  public void setCustomControls(CustomControl... customControls) {
     JsonArray jsonArray = Json.createArray();
     for (int i = 0; i < customControls.length; i++) {
       CustomControl customControl = customControls[i];
