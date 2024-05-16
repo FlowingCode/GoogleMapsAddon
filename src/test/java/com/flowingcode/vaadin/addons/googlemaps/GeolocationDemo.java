@@ -52,7 +52,7 @@ public class GeolocationDemo extends AbstractGoogleMapsDemo {
     currentLocationButton.setClassName("geolocation-button");
     CustomControl geolocationControl =
         new CustomControl(currentLocationButton, ControlPosition.TOP_CENTER);
-    gmaps.addCustomControls(geolocationControl);
+    gmaps.setCustomControls(geolocationControl);
 
     gmaps.addCurrentLocationEventListener(e -> gmaps
         .addMarker(new GoogleMapMarker("You are here!", gmaps.getCenter(), false, Markers.GREEN)));
