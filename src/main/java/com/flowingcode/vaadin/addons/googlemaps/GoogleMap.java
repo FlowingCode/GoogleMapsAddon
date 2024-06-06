@@ -119,7 +119,7 @@ public class GoogleMap extends Component implements HasSize {
    * @param zoom New amount of the zoom.
    */
   public void setZoom(int zoom) {
-    this.getElement().setAttribute("zoom", Integer.toString(zoom));
+    this.getElement().setProperty("zoom", zoom);
   }
 
   /**
