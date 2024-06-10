@@ -789,4 +789,56 @@ public class GoogleMap extends Component implements HasSize {
     }
     this.getElement().setPropertyJson("customControls", jsonArray);
   }
+  
+  /**
+   * Adds a FullScreenEvent listener. The listener is called to notify whether the map is in full
+   * screen mode.
+   * 
+   * @param listener a FullScreenEvent listener
+   * @return Registration object to allow removing the listener
+   */
+  public Registration addFullScreenListener(ComponentEventListener<FullScreenEvent> listener) {
+    DomListenerRegistration registration =
+        this.getElement().addEventListener("fullscreenchange", ev -> {
+          this.getElement()
+          .executeJs(
+              "var isFullScreen = document.fullScreen ||\r\n" 
+                  + " document.mozFullScreen ||\r\n"
+                  + " document.webkitIsFullScreen;\r\n" 
+                  + " return isFullScreen != null ? isFullScreen : false;")
+              .then(Boolean.class, isFullScreen -> listener
+                  .onComponentEvent(new FullScreenEvent(this, true, isFullScreen)));
+        });
+    return registration::remove;
+  }
+
+  /**
+   * Event fired when the full screen mode changes on the map.
+   */
+  public static class FullScreenEvent extends ComponentEvent<GoogleMap> {
+    
+    private boolean isFullScreen;
+    
+    /**
+     * Creates a new FullScreenEvent.
+     * 
+     * @param source the source component
+     * @param fromClient whether the event originated from the client side
+     * @param isFullScreen the full screen state
+     */
+    public FullScreenEvent(GoogleMap source, boolean fromClient, boolean isFullScreen) {
+      super(source, true);
+      this.isFullScreen = isFullScreen;
+    }
+
+    /**
+     * Checks if the map is in full screen mode.
+     * 
+     * @return true if the map is in full screen mode, false otherwise
+     */
+    public boolean isFullScreen() {
+      return isFullScreen;
+    }    
+  }
+  
 }
