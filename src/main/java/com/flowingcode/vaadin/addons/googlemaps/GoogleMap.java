@@ -51,6 +51,8 @@ import org.apache.commons.lang3.StringUtils;
 @JsModule("./googlemaps/geolocation.js")
 public class GoogleMap extends Component implements HasSize {
 
+  private Integer trackLocationId = null;
+
   /** Base map types supported by Google Maps. */
   public enum MapType {
     ROADMAP,
@@ -619,28 +621,37 @@ public class GoogleMap extends Component implements HasSize {
    * 
    * <p>Geolocation requires that the user gives consent to location sharing when prompted by the
    * browser.</p>
+   * 
+   * @throws IllegalStateException if a tracking location session is already active. 
+   *         The current session must be stopped before starting a new one.
    */
   public void trackLocation() {
-    getElement().executeJs("return geolocation.trackLocation($0)", this).then(Integer.class,
-        trackLocationId -> {
-          ComponentUtil.fireEvent(this,
-              new LocationTrackingActivatedEvent(this, false, trackLocationId));
-        });
+    if (this.getTrackLocationId() == null) {
+      getElement().executeJs("return geolocation.trackLocation($0)", this).then(Integer.class,
+          trackLocationId -> {
+            this.trackLocationId = trackLocationId;
+            ComponentUtil.fireEvent(this, new LocationTrackingActivatedEvent(this, false));
+          });
+    } else {
+      throw new IllegalStateException(
+          "A tracking location session is already active. Please stop the current session before starting a new one.");
+    }
+  }
+  
+  /**
+   * Returns track location id if a location tracking was activated.
+   * 
+   * @return the location tracking id
+   */
+  public Integer getTrackLocationId() {
+    return trackLocationId;
   }
   
   /** Event that is fired when activating location tracking. */
   public class LocationTrackingActivatedEvent extends ComponentEvent<GoogleMap> {
 
-    private Integer trackLocationId;
-
-    public LocationTrackingActivatedEvent(GoogleMap source, boolean fromClient,
-        Integer trackLocationId) {
+    public LocationTrackingActivatedEvent(GoogleMap source, boolean fromClient) {
       super(source, fromClient);
-      this.trackLocationId = trackLocationId;
-    }
-
-    public Integer getTrackLocationId() {
-      return trackLocationId;
     }
   }
   
@@ -657,14 +668,15 @@ public class GoogleMap extends Component implements HasSize {
   }
   
   /**
-   * Stops location tracking.
-   * 
-   * @param trackLocationId the id of the current activated location tracking
+   * Stops the current location tracking session.
    */
-  public void stopTrackLocation(Integer trackLocationId) {
-    getElement().executeJs("geolocation.clearTracking($0)", trackLocationId);
+  public void stopTrackLocation() {
+    if(trackLocationId != null) {
+      getElement().executeJs("geolocation.clearTracking($0)", trackLocationId);
+      trackLocationId = null;
+    }    
   }
-  
+
   /**
    * Returns a {@link CompletableFuture} containing the map current {@link LatLonBounds bounds}.
    * 
