@@ -24,6 +24,7 @@ import com.flowingcode.vaadin.addons.demo.DemoSource;
 import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -33,8 +34,6 @@ import com.vaadin.flow.router.Route;
 @SuppressWarnings("serial")
 public class TrackLocationDemo extends AbstractGoogleMapsDemo {
 
-  private Integer trackLocationId = null;
-
   @Override
   protected void createGoogleMapsDemo(String apiKey) {
     GoogleMap gmaps = new GoogleMap(apiKey, null, null);
@@ -43,13 +42,21 @@ public class TrackLocationDemo extends AbstractGoogleMapsDemo {
     gmaps.setZoom(15);
     add(gmaps);
 
-    // create button to activate location tracking
-    Button startLocationTrackingButton =
-        new Button("Start tracking my location", e -> gmaps.trackLocation());
-    // create button to stop location tracking
-    Button stopLocationTrackingButton =
-        new Button("Stop tracking my location", e -> gmaps.stopTrackLocation(trackLocationId));
-    add(startLocationTrackingButton, stopLocationTrackingButton);
+    // create buttons to activate/stop location tracking
+    Button startLocationTrackingButton = new Button("Start tracking my location");
+    Button stopLocationTrackingButton = new Button("Stop tracking my location");
+    startLocationTrackingButton.addClickListener(e -> {
+      gmaps.trackLocation();
+      stopLocationTrackingButton.setEnabled(true);
+    });
+    startLocationTrackingButton.setDisableOnClick(true);
+    stopLocationTrackingButton.addClickListener(e -> {
+      gmaps.stopTrackLocation();
+      startLocationTrackingButton.setEnabled(true);
+    });
+    stopLocationTrackingButton.setEnabled(false);
+    stopLocationTrackingButton.setDisableOnClick(true);
+    add(new HorizontalLayout(startLocationTrackingButton, stopLocationTrackingButton));
 
     // create marker to track location
     GoogleMapMarker locationMarker = new GoogleMapMarker();
@@ -57,9 +64,10 @@ public class TrackLocationDemo extends AbstractGoogleMapsDemo {
     locationMarker.setDraggable(false);
     gmaps.addMarker(locationMarker);
 
-    // add listener to obtain id when track location is activated
+    // add listener to show notification as track location is activated
     gmaps.addLocationTrackingActivatedEventListener(ev -> {
-      trackLocationId = ev.getTrackLocationId();
+      Notification
+          .show("Location tracking was activated with track id: " + gmaps.getTrackLocationId());
     });
 
     // add listener to know when location was updated and update location marker position
@@ -68,9 +76,8 @@ public class TrackLocationDemo extends AbstractGoogleMapsDemo {
     });
 
     // add listener to capture geolocation error
-    gmaps.addGeolocationErrorEventListener(e -> {
-      if (!e.isBrowserHasGeolocationSupport())
-        Notification.show("Your browser doesn't support geolocation.");
-    });
+    gmaps.addGeolocationErrorEventListener(e -> Notification.show(e.isBrowserHasGeolocationSupport()
+        ? "The geolocation service failed on retrieving your location."
+        : "Your browser doesn't support geolocation."));
   }
 }
