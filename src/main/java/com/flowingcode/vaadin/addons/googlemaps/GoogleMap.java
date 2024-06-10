@@ -841,4 +841,12 @@ public class GoogleMap extends Component implements HasSize {
     }    
   }
   
+  /**
+   * Exits the full screen mode on the map.
+   */
+  public void closeFullScreen() {
+    this.getElement()
+        .executeJs("document.exitFullscreen();");
+  }
+  
 }
