@@ -20,6 +20,9 @@
 
 package com.flowingcode.vaadin.addons.googlemaps;
 
+import com.flowingcode.vaadin.addons.googlemaps.maptypestyle.ElementType;
+import com.flowingcode.vaadin.addons.googlemaps.maptypestyle.FeatureType;
+import com.flowingcode.vaadin.addons.googlemaps.maptypestyle.MapStyle;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.Component;
@@ -849,4 +852,17 @@ public class GoogleMap extends Component implements HasSize {
         .executeJs("document.exitFullscreen();");
   }
   
+  /**
+   * Sets style formatting to the {@link FeatureType features} and {@link ElementType elements} of the map.
+   * 
+   * @param mapStyles formatting to be applied to the map features and elements
+   */
+  public void setMapStyle(MapStyle... mapStyles) {
+    JsonArray jsonArray = Json.createArray();
+    for (int i = 0; i < mapStyles.length; i++) {
+      MapStyle mapStyle = mapStyles[i];
+      jsonArray.set(i, mapStyle.getJson());
+    }
+    this.getElement().setPropertyJson("styles", jsonArray);    
+  } 
 }
