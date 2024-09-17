@@ -1,6 +1,7 @@
 [![Published on Vaadin Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/google-maps-addon)
 [![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/google-maps-addon.svg)](https://vaadin.com/directory/component/google-maps-addon)
 [![Build Status](https://jenkins.flowingcode.com/job/GoogleMaps-14-addon/badge/icon)](https://jenkins.flowingcode.com/job/GoogleMaps-14-addon)
+[![Javadoc](https://img.shields.io/badge/javadoc-00b4f0)](https://javadoc.flowingcode.com/artifact/com.flowingcode.vaadin.addons/google-maps)
 
 # Google Maps Add-on
 
