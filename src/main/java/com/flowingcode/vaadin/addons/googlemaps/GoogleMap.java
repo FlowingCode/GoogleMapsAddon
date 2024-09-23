@@ -42,7 +42,9 @@ import elemental.json.Json;
 import elemental.json.JsonArray;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import org.apache.commons.lang3.StringUtils;
 
@@ -54,7 +56,9 @@ import org.apache.commons.lang3.StringUtils;
 @JsModule("./googlemaps/geolocation.js")
 public class GoogleMap extends Component implements HasSize {
 
-  private Integer trackLocationId = null;
+  private Integer trackLocationId = null;  
+
+  private Set<CustomControl> customControls = new HashSet<CustomControl>();
 
   /** Base map types supported by Google Maps. */
   public enum MapType {
@@ -776,21 +780,44 @@ public class GoogleMap extends Component implements HasSize {
     }
     this.getElement().setPropertyJson("customControls", jsonArray);
   }
-  
+    
   /**
    * Sets the custom control buttons to be displayed in the map.
    * 
    * @param customControls list of custom controls to add to the map
    */
   public void setCustomControls(CustomControl... customControls) {
-    JsonArray jsonArray = Json.createArray();
-    for (int i = 0; i < customControls.length; i++) {
-      CustomControl customControl = customControls[i];
-      jsonArray.set(i, customControl.getJson(i));
-      customControl.getControlButton().getElement().setAttribute("slot", "customControlSlot_" + i);
-      this.getElement().appendChild(customControl.getControlButton().getElement());
-    }
-    this.getElement().setPropertyJson("customControls", jsonArray);
+    this.getElement().executeJs("this._removeCustomControls()").then((e) -> {
+      JsonArray jsonArray = Json.createArray();
+      for (int i = 0; i < customControls.length; i++) {
+        CustomControl customControl = customControls[i];
+        jsonArray.set(i, customControl.getJson(i));
+        customControl.getControlButton().getElement().setAttribute("slot", "customControlSlot_" + i);
+        this.getElement().appendChild(customControl.getControlButton().getElement());
+        this.customControls.add(customControl);
+      }
+      this.getElement().setPropertyJson("customControls", jsonArray);
+    });    
+  }
+  
+  /**
+   * Adds a custom control to be displayed in the map.
+   * 
+   * @param customControl the custom control to add to the map
+   */
+  public void addCustomControl(CustomControl customControl) {
+    this.customControls.add(customControl);
+    this.setCustomControls(this.customControls.stream().toArray(CustomControl[]::new));
+  }
+  
+  /**
+   * Removes a custom control added to the map.
+   * 
+   * @param customControl the custom control to be removed
+   */
+  public void removeCustomControl(CustomControl customControl) {
+    this.customControls.remove(customControl);
+    this.setCustomControls(this.customControls.stream().toArray(CustomControl[]::new));
   }
   
   /**
