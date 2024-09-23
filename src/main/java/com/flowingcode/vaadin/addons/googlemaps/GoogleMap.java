@@ -821,6 +821,14 @@ public class GoogleMap extends Component implements HasSize {
   }
   
   /**
+   * Removes all custom controls added to the map.
+   */
+  public void removeCustomControls() {
+    this.customControls.clear();
+    this.getElement().executeJs("this._removeCustomControls()");
+  }
+  
+  /**
    * Adds a FullScreenEvent listener. The listener is called to notify whether the map is in full
    * screen mode.
    * 
