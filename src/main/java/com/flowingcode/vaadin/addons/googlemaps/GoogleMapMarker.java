@@ -39,7 +39,7 @@ import elemental.json.JsonValue;
 @SuppressWarnings("serial")
 @Tag("google-map-marker")
 @JsModule("@flowingcode/google-map/google-map-marker.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.7.1")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.8.0")
 @NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
 public class GoogleMapMarker extends Component {
 
