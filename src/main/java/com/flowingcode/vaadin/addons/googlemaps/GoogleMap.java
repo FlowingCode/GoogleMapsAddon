@@ -42,9 +42,9 @@ import elemental.json.Json;
 import elemental.json.JsonArray;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import org.apache.commons.lang3.StringUtils;
 
@@ -58,7 +58,7 @@ public class GoogleMap extends Component implements HasSize {
 
   private Integer trackLocationId = null;  
 
-  private Set<CustomControl> customControls = new HashSet<CustomControl>();
+  private List<CustomControl> customControls = new ArrayList<CustomControl>();
 
   /** Base map types supported by Google Maps. */
   public enum MapType {
