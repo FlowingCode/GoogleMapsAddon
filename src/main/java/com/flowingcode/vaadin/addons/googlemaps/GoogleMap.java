@@ -787,6 +787,7 @@ public class GoogleMap extends Component implements HasSize {
    * @param customControls list of custom controls to add to the map
    */
   public void setCustomControls(CustomControl... customControls) {
+    this.customControls.clear();
     this.getElement().executeJs("this._removeCustomControls()").then((e) -> {
       JsonArray jsonArray = Json.createArray();
       for (int i = 0; i < customControls.length; i++) {
