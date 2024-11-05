@@ -282,14 +282,14 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
+                   <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.1.1</version>
+                        <version>3.11.1</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
-                                <phase>verify</phase>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
@@ -298,7 +298,10 @@
                         <configuration>
                             <quiet>true</quiet>
 							<doclint>none</doclint>
-                            <additionalparam>-Xdoclint:none</additionalparam>							
+                            <failOnWarnings>false</failOnWarnings>
+                            <links>
+                                <link>https://javadoc.io/doc/com.vaadin/vaadin-platform-javadoc/${vaadin.version}</link>
+                            </links>
                         </configuration>
                     </plugin>
                     <plugin>
