@@ -592,7 +592,7 @@ public class GoogleMap extends Component implements HasSize {
    * Adds a CurrentLocationEvent listener. The listener is called when setting the current location.
    *
    * @param listener
-   * @return
+   * @return a handle that can be used for removing the listener
    */
   public Registration addCurrentLocationEventListener(
       ComponentEventListener<CurrentLocationEvent> listener) {
@@ -604,7 +604,7 @@ public class GoogleMap extends Component implements HasSize {
    * found.
    *
    * @param listener
-   * @return
+   * @return a handle that can be used for removing the listener
    */
   public Registration addGeolocationErrorEventListener(
       ComponentEventListener<GeolocationErrorEvent> listener) {
@@ -705,7 +705,7 @@ public class GoogleMap extends Component implements HasSize {
    * pan or zoom)
    *
    * @param listener
-   * @return
+   * @return a handle that can be used for removing the listener
    */
   public Registration addMapIdleListener(ComponentEventListener<GoogleMapIdleEvent> listener) {
     DomListenerRegistration registration =
@@ -726,7 +726,7 @@ public class GoogleMap extends Component implements HasSize {
    * zoomed
    *
    * @param listener
-   * @return
+   * @return a handle that can be used for removing the listener
    */
   public Registration addGoogleMapBoundsChangedListener(
       ComponentEventListener<GoogleMapBoundsChangedEvent> listener) {
