@@ -270,7 +270,7 @@ public class GoogleMapMarker extends Component {
    * Adds a DragEndEvent listener. The listener is called when a marker' drag ends.
    * 
    * @param listener
-   * @return
+   * @return a handle that can be used for removing the listener
    */
   public Registration addDragEndEventListener(ComponentEventListener<DragEndEvent> listener) {
     this.getElement().setProperty("dragEvents", true);
@@ -306,7 +306,7 @@ public class GoogleMapMarker extends Component {
    * Adds a click event listener to a marker.
    * 
    * @param listener
-   * @return
+   * @return a handle that can be used for removing the listener
    */
   public Registration addClickListener(ComponentEventListener<GoogleMapMarkerClickEvent> listener) {
     this.getElement().setProperty("clickable", true);
