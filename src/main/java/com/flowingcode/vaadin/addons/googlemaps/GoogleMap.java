@@ -69,8 +69,7 @@ public class GoogleMap extends Component implements HasSize {
   }
 
   /**
-   * Initiates a new GoogleMap object with default settings from the {@link GoogleMapState state
-   * object}.
+   * Initiates a new GoogleMap object.
    *
    * @param apiKey The Maps API key from Google. Not required when developing in localhost or when
    *     using a client id. Use null or empty string to disable.
@@ -434,7 +433,7 @@ public class GoogleMap extends Component implements HasSize {
   /**
    * Sets a KML or GeoRSS feed url to be displayed as a KML Layer in the map.
    * 
-   * @param url to be displayed.
+   * @param kml the url to be displayed.
    */
   public void setKml(String kml){
     this.getElement().setProperty("kml", kml);
