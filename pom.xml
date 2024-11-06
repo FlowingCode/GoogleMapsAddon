@@ -298,7 +298,7 @@
                         <configuration>
                             <quiet>true</quiet>
 							<doclint>none</doclint>
-                            <failOnWarnings>false</failOnWarnings>
+                            <failOnWarnings>true</failOnWarnings>
                             <links>
                                 <link>https://javadoc.io/doc/com.vaadin/vaadin-platform-javadoc/${vaadin.version}</link>
                             </links>
