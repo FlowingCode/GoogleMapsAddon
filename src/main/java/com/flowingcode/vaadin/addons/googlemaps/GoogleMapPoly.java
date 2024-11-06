@@ -182,7 +182,7 @@ public abstract class GoogleMapPoly extends Component {
   }
 
   /**
-   * @deprecated, use {@link #setIcons(IconSequence...)} instead.
+   * @deprecated Use {@link #setIcons(IconSequence...)} instead.
    */
   @Deprecated
   public void setIcons(Icon... icons) {

@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +25,7 @@ import elemental.json.JsonObject;
 import java.util.Optional;
 
 /**
- * @deprecated, use {@link IconSequence} instead.
+ * @deprecated Use {@link IconSequence} instead.
  */
 @Deprecated
 public class Icon extends Symbol {
@@ -34,9 +34,9 @@ public class Icon extends Symbol {
 
   public Icon(String path, String strokeColor, String fillColor, int fillOpacity, int repeat) {
     super(path);
-    this.setStrokeColor(strokeColor);
-    this.setFillColor(fillColor);
-    this.setFillOpacity(Double.valueOf(fillOpacity));
+    setStrokeColor(strokeColor);
+    setFillColor(fillColor);
+    setFillOpacity(Double.valueOf(fillOpacity));
     this.repeat = repeat;
   }
 
