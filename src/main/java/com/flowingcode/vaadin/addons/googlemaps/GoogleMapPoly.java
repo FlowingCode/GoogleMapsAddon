@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -60,94 +60,94 @@ public abstract class GoogleMapPoly extends Component {
   }
 
   public void setFillOpacity(double opacity) {
-    this.getElement().setProperty("fillOpacity", opacity);
+    getElement().setProperty("fillOpacity", opacity);
   }
 
   public double getFillOpacity() {
-    return this.getElement().getProperty("fillOpacity", 1d);
+    return getElement().getProperty("fillOpacity", 1d);
   }
 
   public void setStrokeOpacity(double opacity) {
-    this.getElement().setProperty("strokeOpacity", opacity);
+    getElement().setProperty("strokeOpacity", opacity);
   }
 
   public double getStrokeOpacity() {
-    return this.getElement().getProperty("strokeOpacity", 1d);
+    return getElement().getProperty("strokeOpacity", 1d);
   }
 
   public void setStrokePosition(StrokePosition position) {
-    this.getElement().setProperty("strokePosition", position.name().toLowerCase());
+    getElement().setProperty("strokePosition", position.name().toLowerCase());
   }
 
   public StrokePosition getStrokePosition() {
-    return StrokePosition.valueOf(this.getElement().getProperty("strokePosition").toUpperCase());
+    return StrokePosition.valueOf(getElement().getProperty("strokePosition").toUpperCase());
   }
 
   public void setStrokeWeight(double weight) {
-    this.getElement().setProperty("strokeWeight", weight);
+    getElement().setProperty("strokeWeight", weight);
   }
 
   public double getStrokeWeight() {
-    return this.getElement().getProperty("strokeWeight", 1d);
+    return getElement().getProperty("strokeWeight", 1d);
   }
 
   public void setZIndex(double zindex) {
-    this.getElement().setProperty("zIndex", zindex);
+    getElement().setProperty("zIndex", zindex);
   }
 
   public double getZIndex() {
-    return this.getElement().getProperty("zIndex", 1d);
+    return getElement().getProperty("zIndex", 1d);
   }
 
   public void setFillColor(String string) {
-    this.getElement().setProperty("fillColor", string);
+    getElement().setProperty("fillColor", string);
   }
 
   public String getFillColor() {
-    return this.getElement().getProperty("fillColor");
+    return getElement().getProperty("fillColor");
   }
 
   public void setStrokeColor(String string) {
-    this.getElement().setProperty("strokeColor", string);
+    getElement().setProperty("strokeColor", string);
   }
 
   public String getStrokeColor() {
-    return this.getElement().getProperty("strokeColor");
+    return getElement().getProperty("strokeColor");
   }
 
   public void setClosed(boolean b) {
-    this.getElement().setProperty("closed", b);
+    getElement().setProperty("closed", b);
   }
 
   public boolean isClosed() {
-    return this.getElement().getProperty("closed", false);
+    return getElement().getProperty("closed", false);
   }
 
   public void setGeodesic(boolean b) {
-    this.getElement().setProperty("geodesic", b);
+    getElement().setProperty("geodesic", b);
   }
 
   public boolean isGeodesic() {
-    return this.getElement().getProperty("geodesic", false);
+    return getElement().getProperty("geodesic", false);
   }
 
   public void setPoints(Iterable<GoogleMapPoint> points) {
-    points.forEach(point -> this.getElement().appendChild(point.getElement()));
+    points.forEach(point -> getElement().appendChild(point.getElement()));
   }
 
   public GoogleMapPoint addPoint(LatLon position) {
     GoogleMapPoint point = new GoogleMapPoint(position.getLat(), position.getLon());
-    this.getElement().appendChild(point.getElement());
+    getElement().appendChild(point.getElement());
     return point;
   }
 
   public void addPoint(GoogleMapPoint point) {
-    this.getElement().appendChild(point.getElement());
+    getElement().appendChild(point.getElement());
   }
 
   @SuppressWarnings("squid:S3242")
   public void removePoint(GoogleMapPoint point) {
-    this.getElement().removeChild(point.getElement());
+    getElement().removeChild(point.getElement());
   }
 
   @DomEvent("google-map-poly-click")
@@ -161,23 +161,23 @@ public abstract class GoogleMapPoly extends Component {
         boolean fromClient,
         @EventData(value = "event.detail.latLng") JsonValue latLng) {
       super(source);
-      this.lat = ((JsonObject) latLng).getNumber("lat");
-      this.lon = ((JsonObject) latLng).getNumber("lng");
+      lat = ((JsonObject) latLng).getNumber("lat");
+      lon = ((JsonObject) latLng).getNumber("lng");
     }
 
     public double getLatitude() {
-      return this.lat;
+      return lat;
     }
 
     public double getLongitude() {
-      return this.lon;
+      return lon;
     }
   }
 
   public Registration addClickListener(
       ComponentEventListener<GoogleMapPolyClickEvent> listener) {
-    this.getElement().setProperty("clickable", true);
-    this.getElement().setProperty("clickEvents", true);
+    getElement().setProperty("clickable", true);
+    getElement().setProperty("clickEvents", true);
     return addListener(GoogleMapPolyClickEvent.class, listener);
   }
 
@@ -189,21 +189,21 @@ public abstract class GoogleMapPoly extends Component {
     JsonArray jsonArray = Json.createArray();
     for (int i = 0; i < icons.length; i++) {
       jsonArray.set(i, icons[i].getJson());
-    }   
-    this.getElement().setPropertyJson("icons", jsonArray);
+    }
+    getElement().setPropertyJson("icons", jsonArray);
   }
-  
+
   /**
    * Set icons to the polygon/polyline.
-   * 
+   *
    * @param icons the icons to set
    */
   public void setIcons(IconSequence... icons) {
     JsonArray jsonArray = Json.createArray();
     for (int i = 0; i < icons.length; i++) {
       jsonArray.set(i, icons[i].getJson());
-    }   
-    this.getElement().setPropertyJson("icons", jsonArray);
+    }
+    getElement().setPropertyJson("icons", jsonArray);
   }
-  
+
 }
