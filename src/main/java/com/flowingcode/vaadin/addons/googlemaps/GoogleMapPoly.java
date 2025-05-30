@@ -57,6 +57,7 @@ public abstract class GoogleMapPoly extends Component {
     setFillColor(DEFAULT_FILL_COLOR);
     setFillOpacity(DEFAULT_FILL_OPACITY);
     setPoints(points);
+    getElement().setAttribute("slot", "objects");
   }
 
   public void setFillOpacity(double opacity) {
