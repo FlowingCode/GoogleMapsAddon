@@ -53,6 +53,7 @@ public class GoogleMapMarker extends Component {
   public GoogleMapMarker() {
     id = idCounter;
     idCounter++;
+    this.getElement().setAttribute("slot", "markers");
   }
 
   /**
@@ -67,7 +68,6 @@ public class GoogleMapMarker extends Component {
     this.setCaption(caption);
     this.setPosition(position);
     this.setDraggable(draggable);
-    this.getElement().setAttribute("slot", "markers");
   }
 
   /**
