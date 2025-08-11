@@ -2,7 +2,7 @@
  * #%L
  * Google Maps Addon
  * %%
- * Copyright (C) 2020 - 2024 Flowing Code
+ * Copyright (C) 2020 - 2025 Flowing Code
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -69,7 +70,16 @@ public class AddMarkersDemo extends AbstractGoogleMapsDemo {
     
     Checkbox draggable = new Checkbox("Draggable");    
     Checkbox withRightClick = new Checkbox("Right Click");
-        
+    TextField labelText = new TextField();
+    labelText.setPlaceholder("Label Text"); // hide-source
+    labelText.setEnabled(false); // hide-source
+    Checkbox withLabel = new Checkbox("With Label");
+    // #if vaadin eq 0
+    withLabel.addValueChangeListener(event -> {
+      labelText.setEnabled(event.getValue());
+    });
+    // #endif
+      
     Button addMarker =
         new Button(
             "Add Marker",
@@ -108,14 +118,31 @@ public class AddMarkersDemo extends AbstractGoogleMapsDemo {
                   notification.open();
                 });
               }
+
+              if(withLabel.getValue()) {
+                MarkerLabel label = new MarkerLabel(labelText.getValue());
+                label.setColor("white");
+                label.setFontWeight("bold");
+                marker.setLabel(label);
+              }
+
               gmaps.addMarker(marker);
+              // #if vaadin eq 0
+              // Reset form
+              colorCB.clear();
+              draggable.setValue(false);
+              withRightClick.setValue(false);
+              labelText.clear();
+              withLabel.setValue(false);
+              // #endif
             });
 
     FlexLayout layout = new FlexLayout();
     layout.setFlexWrap(FlexWrap.WRAP); // hide-source
     addMarker.addClassName("margin-button"); // hide-source
     colorCB.addClassName("margin-button"); // hide-source
-    layout.add(colorCB, draggable, withRightClick, addMarker);
+    labelText.addClassName("margin-button"); // hide-source
+    layout.add(colorCB, draggable, withRightClick, withLabel, labelText, addMarker);
     layout.setAlignItems(Alignment.BASELINE); // hide-source
     layout.getStyle().set("margin-top", "0"); // hide-source
     add(gmaps, layout);
