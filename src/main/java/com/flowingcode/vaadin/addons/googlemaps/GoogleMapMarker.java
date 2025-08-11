@@ -197,6 +197,16 @@ public class GoogleMapMarker extends Component {
   }
 
   /**
+   * Sets the label of the marker In order to set the label's position use
+   * MarkerIcon::setLabelOrigin property.
+   * 
+   * @param label the new marker's label
+   */
+  public void setLabel(MarkerLabel label) {
+    this.getElement().setPropertyJson("label", label.getJson());
+  }
+
+  /**
    * Checks if marker animation is enabled.
    *
    * @return true, if enabled
