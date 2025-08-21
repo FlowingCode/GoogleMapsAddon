@@ -41,11 +41,12 @@ public class GeolocationOptions {
    * If true and if the device is able to provide a more accurate position, it will do so. This may
    * result in slower response times or increased power consumption.
    */
-  private Boolean enableHighAccuracy;
+  private boolean enableHighAccuracy;
 
   /**
    * A positive long value representing the maximum length of time (in milliseconds) the device is
-   * allowed to take in order to return a position.
+   * allowed to take in order to return a position. 
+   * If null, the device won't timeout until the position is available.
    */
   private Long timeout;
 
@@ -53,7 +54,7 @@ public class GeolocationOptions {
    * A positive long value representing the maximum age (in milliseconds) of a possible cached
    * position that is acceptable to return.
    */
-  private Long maximumAge;
+  private long maximumAge;
 
   /**
    * Converts the options to a JsonObject to be sent to the client-side.
@@ -62,14 +63,10 @@ public class GeolocationOptions {
    */
   public JsonObject toJson() {
     JsonObject json = Json.createObject();
-    if (enableHighAccuracy != null) {
-      json.put("enableHighAccuracy", enableHighAccuracy);
-    }
+    json.put("enableHighAccuracy", enableHighAccuracy);
+    json.put("maximumAge", maximumAge);
     if (timeout != null) {
       json.put("timeout", timeout);
-    }
-    if (maximumAge != null) {
-      json.put("maximumAge", maximumAge);
     }
     return json;
   }
