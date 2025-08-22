@@ -2,7 +2,7 @@
  * #%L
  * Google Maps Addon
  * %%
- * Copyright (C) 2020 - 2024 Flowing Code
+ * Copyright (C) 2020 - 2025 Flowing Code
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
  */
 window.geolocation = {
 
-	get: function(map) {
+	get: function(map, options) {
 		// if browser supports geolocation, return current location
 		if (navigator.geolocation) {
 
@@ -29,7 +29,8 @@ window.geolocation = {
 				}, 
 				() => {
 					this._handleGeolocationError(true, map);
-				}
+				},
+				options
 			);
 
 		} else { // browser doesn't support geolocation
@@ -37,7 +38,7 @@ window.geolocation = {
 		}
 	},
 	
-	trackLocation: function(map) {
+	trackLocation: function(map, options) {
 		let trackLocationId;
 		if (navigator.geolocation) {
 
@@ -47,7 +48,8 @@ window.geolocation = {
 				}, 
 				() => {
 					this._handleGeolocationError(true, map);
-				}
+				},
+				options
 			);
 		} else { // browser doesn't support geolocation
 			this._handleGeolocationError(false, map);

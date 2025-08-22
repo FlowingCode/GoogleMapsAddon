@@ -2,7 +2,7 @@
  * #%L
  * Google Maps Addon
  * %%
- * Copyright (C) 2020 - 2024 Flowing Code
+ * Copyright (C) 2020 - 2025 Flowing Code
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -535,15 +535,28 @@ public class GoogleMap extends Component implements HasSize {
             }).addEventData("event.detail.latLng");
     return registration::remove;
   }
-
+  
   /**
-   * Sets current location on map.
+   * Sets current location on map using default geolocation options.
    *
    * <p>Setting geolocation requires that the user gives consent to location sharing when prompted
    * by the browser.
    */
   public void goToCurrentLocation() {
-    getElement().executeJs("geolocation.get($0)", this);
+    goToCurrentLocation(null);
+  }
+  
+  /**
+   * Sets current location on map using specific geolocation options.
+   *
+   * <p>Setting geolocation requires that the user gives consent to location sharing when prompted
+   * by the browser.
+   * 
+   * @param options the geolocation options (enableHighAccuracy, timeout, maximumAge)
+   */
+  public void goToCurrentLocation(GeolocationOptions options) {
+    JsonObject optionsJson = options == null ? Json.createObject() : options.toJson();
+    getElement().executeJs("geolocation.get($0, $1)", this, optionsJson);
   }
 
   @ClientCallable
@@ -610,6 +623,24 @@ public class GoogleMap extends Component implements HasSize {
       ComponentEventListener<GeolocationErrorEvent> listener) {
     return addListener(GeolocationErrorEvent.class, listener);
   }
+  
+  /**
+   * Activates tracking current location on map using default geolocation options.
+   *
+   * <p>Uses <a href=
+   * "https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition">geolocation#watchPosition</a>
+   * method to track current position.</p>
+   *
+   * <p>Geolocation requires that the user gives consent to location sharing when prompted by the
+   * browser.</p>
+   *
+   * @throws IllegalStateException if a tracking location session is already active.
+   * The current session must be stopped before starting a new one.
+   */
+  public void trackLocation() {
+    trackLocation(null);
+  }
+
 
   /**
    * Activates tracking current location on map.
@@ -621,13 +652,15 @@ public class GoogleMap extends Component implements HasSize {
    * <p>Geolocation requires that the user gives consent to location sharing when prompted by the
    * browser.</p>
    *
+   * @param options the geolocation options (enableHighAccuracy, timeout, maximumAge)
    * @throws IllegalStateException if a tracking location session is already active.
    *         The current session must be stopped before starting a new one.
    */
-  public void trackLocation() {
+  public void trackLocation(GeolocationOptions options) {
     if (getTrackLocationId() == null) {
-      getElement().executeJs("return geolocation.trackLocation($0)", this).then(Integer.class,
-          trackLocationId -> {
+      JsonObject optionsJson = options == null ? Json.createObject() : options.toJson();
+      getElement().executeJs("return geolocation.trackLocation($0, $1)", this, optionsJson)
+          .then(Integer.class, trackLocationId -> {
             this.trackLocationId = trackLocationId;
             ComponentUtil.fireEvent(this, new LocationTrackingActivatedEvent(this, false));
           });

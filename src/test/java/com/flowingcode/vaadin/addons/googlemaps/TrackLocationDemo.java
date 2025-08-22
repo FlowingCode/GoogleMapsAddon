@@ -2,7 +2,7 @@
  * #%L
  * Google Maps Addon
  * %%
- * Copyright (C) 2020 - 2024 Flowing Code
+ * Copyright (C) 2020 - 2025 Flowing Code
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,12 +41,15 @@ public class TrackLocationDemo extends AbstractGoogleMapsDemo {
     gmaps.setSizeFull();
     gmaps.setZoom(15);
     add(gmaps);
+    
+    // define geolocation options for more accurate tracking
+    GeolocationOptions options = new GeolocationOptions(true, 5000L, 0L);
 
     // create buttons to activate/stop location tracking
     Button startLocationTrackingButton = new Button("Start tracking my location");
     Button stopLocationTrackingButton = new Button("Stop tracking my location");
     startLocationTrackingButton.addClickListener(e -> {
-      gmaps.trackLocation();
+      gmaps.trackLocation(options);
       stopLocationTrackingButton.setEnabled(true);
     });
     startLocationTrackingButton.setDisableOnClick(true);
