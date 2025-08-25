@@ -120,6 +120,10 @@ public class AddMarkersDemo extends AbstractGoogleMapsDemo {
               }
 
               if(withLabel.getValue()) {
+                if(labelText.getValue().isEmpty()) {
+                  Notification.show("Please select a label for the marker");
+                  return;
+                }
                 MarkerLabel label = new MarkerLabel(labelText.getValue());
                 label.setColor("white");
                 label.setFontWeight("bold");
