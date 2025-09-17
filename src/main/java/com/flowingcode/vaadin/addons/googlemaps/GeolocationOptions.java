@@ -29,7 +29,7 @@ import lombok.Setter;
  * Representation of optional parameters for a geolocation request.
  * 
  * @see <a href=
- *      https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition#options">Options
+ *      "https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition#options">Options
  *      documentation</a>
  */
 @Getter
