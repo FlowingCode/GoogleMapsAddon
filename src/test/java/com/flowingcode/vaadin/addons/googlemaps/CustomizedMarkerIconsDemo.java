@@ -41,7 +41,7 @@ public class CustomizedMarkerIconsDemo extends AbstractGoogleMapsDemo {
 
     // marker ONLY using an url for the marker's icon image
     gmaps.addMarker("Marker with only an URL as icon", gmaps.getCenter(), false,
-        "https://www.flowingcode.com/wp-content/uploads/2020/06/FCMarker.png");
+        "https://www.flowingcode.com/wp-content/uploads/2025/09/marker_1.png");
 
     // marker using a MarkerIcon, url icon image + customization
     MarkerIcon markerIcon = new MarkerIcon(Markers.GREEN);
