@@ -67,7 +67,7 @@ public class GoogleMapsDemo extends AbstractGoogleMapsDemo {
             "Center",
             gmaps.getCenter(),
             false,
-            "https://www.flowingcode.com/wp-content/uploads/2020/06/FCMarker.png");
+            "https://www.flowingcode.com/wp-content/uploads/2025/09/marker_1.png");
     flowingmarker.addInfoWindow("<h1>Flowing Code</h1>");
 
     // add polygon with icons and click listener
