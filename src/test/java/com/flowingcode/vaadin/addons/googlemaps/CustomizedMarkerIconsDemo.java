@@ -36,7 +36,7 @@ public class CustomizedMarkerIconsDemo extends AbstractGoogleMapsDemo {
     GoogleMap gmaps = new GoogleMap(apiKey, null, null);
     gmaps.setMapType(MapType.ROADMAP);
     gmaps.setSizeFull();
-    gmaps.setCenter(new LatLon(-31.635175, -60.698405));
+    gmaps.setCenter(new LatLon(-31.620173186615883, -60.67964404821396));
     gmaps.setZoom(16);
 
     // marker ONLY using an url for the marker's icon image
