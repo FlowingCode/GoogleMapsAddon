@@ -41,7 +41,7 @@ public class GoogleMapsDemo extends AbstractGoogleMapsDemo {
     GoogleMap gmaps = new GoogleMap(apiKey, null, null);
     gmaps.setMapType(MapType.SATELLITE);
     gmaps.setSizeFull();
-    gmaps.setCenter(new LatLon(-31.636036, -60.7055271));
+    gmaps.setCenter(new LatLon(-31.620173186615883, -60.67964404821396));
 
     // add click listener to get latitude and longitude on left click
     gmaps.addClickListener(
