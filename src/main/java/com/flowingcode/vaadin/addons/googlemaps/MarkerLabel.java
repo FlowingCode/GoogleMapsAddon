@@ -69,6 +69,12 @@ public class MarkerLabel {
    * The className property of the label's element (equivalent to the element's class attribute).
    * Multiple space-separated CSS classes can be added. The font color, size, weight, and family can
    * only be set via the other properties of <code>MarkerLabel</code>.
+   * 
+   * <p>
+   * <strong>Note:</strong> At the moment, there is no direct way to apply the className by
+   * importing a stylesheet into the component's shadow root. For alternative workarounds, see
+   * <a href="https://github.com/FlowingCode/GoogleMapsAddon/issues/159#issuecomment-3325302923">
+   * this comment on GitHub</a>.
    */
   private String className;
 
