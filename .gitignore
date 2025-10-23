@@ -10,3 +10,7 @@
 /node
 tsconfig.json
 types.d.ts
+vite.generated.ts
+vite.config.ts
+/frontend/generated
+/frontend/index.html
