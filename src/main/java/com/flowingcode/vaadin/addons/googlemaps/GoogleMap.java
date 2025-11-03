@@ -23,6 +23,7 @@ package com.flowingcode.vaadin.addons.googlemaps;
 import com.flowingcode.vaadin.addons.googlemaps.maptypestyle.ElementType;
 import com.flowingcode.vaadin.addons.googlemaps.maptypestyle.FeatureType;
 import com.flowingcode.vaadin.addons.googlemaps.maptypestyle.MapStyle;
+import com.flowingcode.vaadin.jsonmigration.JsonMigration;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.Component;
@@ -518,7 +519,7 @@ public class GoogleMap extends Component implements HasSize {
     DomListenerRegistration registration =
         getElement()
             .addEventListener("google-map-click", ev -> {
-              JsonObject latLng = ev.getEventData().get("event.detail.latLng");
+              JsonObject latLng = JsonMigration.getEventData(ev).get("event.detail.latLng");
               listener.onComponentEvent(new GoogleMapClickEvent(this, true, latLng));
             }).addEventData("event.detail.latLng");
     return registration::remove;
@@ -530,7 +531,7 @@ public class GoogleMap extends Component implements HasSize {
     DomListenerRegistration registration =
         getElement()
             .addEventListener("google-map-rightclick", ev -> {
-              JsonObject latLng = ev.getEventData().get("event.detail.latLng");
+              JsonObject latLng = JsonMigration.getEventData(ev).get("event.detail.latLng");
               listener.onComponentEvent(new GoogleMapClickEvent(this, true, latLng));
             }).addEventData("event.detail.latLng");
     return registration::remove;
@@ -767,7 +768,7 @@ public class GoogleMap extends Component implements HasSize {
     DomListenerRegistration registration =
         getElement().addEventListener("google-map-bounds_changed", ev -> {
           listener.onComponentEvent(new GoogleMapBoundsChangedEvent(this, true,
-              new LatLonBounds(ev.getEventData().get("event.detail"))));
+              new LatLonBounds(JsonMigration.getEventData(ev).get("event.detail"))));
         }).debounce(1000, DebouncePhase.TRAILING).addEventData("event.detail");
     return registration::remove;
   }
@@ -803,7 +804,7 @@ public class GoogleMap extends Component implements HasSize {
       customControl.getControlButton().getElement().setAttribute("slot", "customControlSlot_" + i);
       getElement().appendChild(customControl.getControlButton().getElement());
     }
-    getElement().setPropertyJson("customControls", jsonArray);
+    JsonMigration.setPropertyJson(getElement(), "customControls", jsonArray);
   }
 
   /**
@@ -822,7 +823,7 @@ public class GoogleMap extends Component implements HasSize {
         getElement().appendChild(customControl.getControlButton().getElement());
         this.customControls.add(customControl);
       }
-      getElement().setPropertyJson("customControls", jsonArray);
+      JsonMigration.setPropertyJson(getElement(), "customControls", jsonArray);
     });
   }
 
@@ -924,6 +925,6 @@ public class GoogleMap extends Component implements HasSize {
       MapStyle mapStyle = mapStyles[i];
       jsonArray.set(i, mapStyle.getJson());
     }
-    getElement().setPropertyJson("styles", jsonArray);
+    JsonMigration.setPropertyJson(getElement(), "styles", jsonArray);
   }
 }

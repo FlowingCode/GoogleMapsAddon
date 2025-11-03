@@ -20,6 +20,7 @@
 
 package com.flowingcode.vaadin.addons.googlemaps;
 
+import com.flowingcode.vaadin.jsonmigration.JsonMigration;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -191,7 +192,7 @@ public abstract class GoogleMapPoly extends Component {
     for (int i = 0; i < icons.length; i++) {
       jsonArray.set(i, icons[i].getJson());
     }
-    getElement().setPropertyJson("icons", jsonArray);
+    JsonMigration.setPropertyJson(getElement(), "icons", jsonArray);
   }
 
   /**
@@ -204,7 +205,7 @@ public abstract class GoogleMapPoly extends Component {
     for (int i = 0; i < icons.length; i++) {
       jsonArray.set(i, icons[i].getJson());
     }
-    getElement().setPropertyJson("icons", jsonArray);
+    JsonMigration.setPropertyJson(getElement(), "icons", jsonArray);
   }
 
 }

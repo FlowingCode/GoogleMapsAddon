@@ -21,6 +21,7 @@
 package com.flowingcode.vaadin.addons.googlemaps;
 
 
+import com.flowingcode.vaadin.jsonmigration.JsonMigration;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
@@ -193,7 +194,7 @@ public class GoogleMapMarker extends Component {
    * @param icon the icon image of the marker
    */
   public void setIcon(GoogleMapIcon icon) {
-    this.getElement().setPropertyJson("icon", icon.getJson());
+    JsonMigration.setPropertyJson(getElement(), "icon", icon.getJson());
   }
 
   /**
@@ -203,7 +204,7 @@ public class GoogleMapMarker extends Component {
    * @param label the new marker's label
    */
   public void setLabel(MarkerLabel label) {
-    this.getElement().setPropertyJson("label", label.getJson());
+    JsonMigration.setPropertyJson(getElement(), "label", label.getJson());
   }
 
   /**
