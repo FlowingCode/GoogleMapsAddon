@@ -46,6 +46,7 @@ import elemental.json.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import lombok.experimental.ExtensionMethod;
 import org.apache.commons.lang3.StringUtils;
 
 @SuppressWarnings("serial")
@@ -54,6 +55,7 @@ import org.apache.commons.lang3.StringUtils;
 @NpmPackage(value = "@flowingcode/google-map", version = "3.9.0")
 @NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
 @JsModule("./googlemaps/geolocation.js")
+@ExtensionMethod(value = JsonMigration.class, suppressBaseMethods = true)
 public class GoogleMap extends Component implements HasSize {
 
   private Integer trackLocationId = null;
@@ -519,7 +521,7 @@ public class GoogleMap extends Component implements HasSize {
     DomListenerRegistration registration =
         getElement()
             .addEventListener("google-map-click", ev -> {
-              JsonObject latLng = JsonMigration.getEventData(ev).get("event.detail.latLng");
+              JsonObject latLng = ev.getEventData().get("event.detail.latLng");
               listener.onComponentEvent(new GoogleMapClickEvent(this, true, latLng));
             }).addEventData("event.detail.latLng");
     return registration::remove;
@@ -531,7 +533,7 @@ public class GoogleMap extends Component implements HasSize {
     DomListenerRegistration registration =
         getElement()
             .addEventListener("google-map-rightclick", ev -> {
-              JsonObject latLng = JsonMigration.getEventData(ev).get("event.detail.latLng");
+              JsonObject latLng = ev.getEventData().get("event.detail.latLng");
               listener.onComponentEvent(new GoogleMapClickEvent(this, true, latLng));
             }).addEventData("event.detail.latLng");
     return registration::remove;
@@ -768,7 +770,7 @@ public class GoogleMap extends Component implements HasSize {
     DomListenerRegistration registration =
         getElement().addEventListener("google-map-bounds_changed", ev -> {
           listener.onComponentEvent(new GoogleMapBoundsChangedEvent(this, true,
-              new LatLonBounds(JsonMigration.getEventData(ev).get("event.detail"))));
+              new LatLonBounds(ev.getEventData().get("event.detail"))));
         }).debounce(1000, DebouncePhase.TRAILING).addEventData("event.detail");
     return registration::remove;
   }
@@ -804,7 +806,7 @@ public class GoogleMap extends Component implements HasSize {
       customControl.getControlButton().getElement().setAttribute("slot", "customControlSlot_" + i);
       getElement().appendChild(customControl.getControlButton().getElement());
     }
-    JsonMigration.setPropertyJson(getElement(), "customControls", jsonArray);
+    getElement().setPropertyJson("customControls", jsonArray);
   }
 
   /**
@@ -823,7 +825,7 @@ public class GoogleMap extends Component implements HasSize {
         getElement().appendChild(customControl.getControlButton().getElement());
         this.customControls.add(customControl);
       }
-      JsonMigration.setPropertyJson(getElement(), "customControls", jsonArray);
+      getElement().setPropertyJson("customControls", jsonArray);
     });
   }
 
@@ -925,6 +927,6 @@ public class GoogleMap extends Component implements HasSize {
       MapStyle mapStyle = mapStyles[i];
       jsonArray.set(i, mapStyle.getJson());
     }
-    JsonMigration.setPropertyJson(getElement(), "styles", jsonArray);
+    getElement().setPropertyJson("styles", jsonArray);
   }
 }

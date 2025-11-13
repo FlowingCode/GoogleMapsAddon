@@ -35,6 +35,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.shared.Registration;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
+import lombok.experimental.ExtensionMethod;
 
 /** The class representing a marker of the Google Map. */
 @SuppressWarnings("serial")
@@ -42,6 +43,7 @@ import elemental.json.JsonValue;
 @JsModule("@flowingcode/google-map/google-map-marker.js")
 @NpmPackage(value = "@flowingcode/google-map", version = "3.9.0")
 @NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
+@ExtensionMethod(value = JsonMigration.class, suppressBaseMethods = true)
 public class GoogleMapMarker extends Component {
 
   private static long idCounter = 0;
@@ -194,7 +196,7 @@ public class GoogleMapMarker extends Component {
    * @param icon the icon image of the marker
    */
   public void setIcon(GoogleMapIcon icon) {
-    JsonMigration.setPropertyJson(getElement(), "icon", icon.getJson());
+    this.getElement().setPropertyJson("icon", icon.getJson());
   }
 
   /**
@@ -204,7 +206,7 @@ public class GoogleMapMarker extends Component {
    * @param label the new marker's label
    */
   public void setLabel(MarkerLabel label) {
-    JsonMigration.setPropertyJson(getElement(), "label", label.getJson());
+    this.getElement().setPropertyJson("label", label.getJson());
   }
 
   /**
