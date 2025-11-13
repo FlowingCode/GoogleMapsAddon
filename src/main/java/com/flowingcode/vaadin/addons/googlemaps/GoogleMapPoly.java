@@ -35,6 +35,7 @@ import elemental.json.JsonArray;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
 import java.util.List;
+import lombok.experimental.ExtensionMethod;
 
 @SuppressWarnings("serial")
 @Tag("google-map-poly")
@@ -42,6 +43,7 @@ import java.util.List;
 @JsModule("@flowingcode/google-map/google-map-point.js")
 @NpmPackage(value = "@flowingcode/google-map", version = "3.9.0")
 @NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
+@ExtensionMethod(value = JsonMigration.class, suppressBaseMethods = true)
 public abstract class GoogleMapPoly extends Component {
 
   private static final double DEFAULT_FILL_OPACITY = 0.5d;
@@ -192,7 +194,7 @@ public abstract class GoogleMapPoly extends Component {
     for (int i = 0; i < icons.length; i++) {
       jsonArray.set(i, icons[i].getJson());
     }
-    JsonMigration.setPropertyJson(getElement(), "icons", jsonArray);
+    getElement().setPropertyJson("icons", jsonArray);
   }
 
   /**
@@ -205,7 +207,7 @@ public abstract class GoogleMapPoly extends Component {
     for (int i = 0; i < icons.length; i++) {
       jsonArray.set(i, icons[i].getJson());
     }
-    JsonMigration.setPropertyJson(getElement(), "icons", jsonArray);
+    getElement().setPropertyJson("icons", jsonArray);
   }
 
 }
