@@ -569,7 +569,7 @@
 				<dependency>
 					<groupId>com.flowingcode.vaadin.addons.demo</groupId>
 					<artifactId>commons-demo</artifactId>
-					<version>4.4.0-SNAPSHOT</version>
+					<version>5.0.0</version>
 					<scope>test</scope>
 				</dependency>
 			</dependencies>
