@@ -47,7 +47,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import lombok.experimental.ExtensionMethod;
-import org.apache.commons.lang3.StringUtils;
 
 @SuppressWarnings("serial")
 @Tag("google-map")
@@ -83,12 +82,16 @@ public class GoogleMap extends Component implements HasSize {
    */
   public GoogleMap(String apiKey, String clientId, String language) {
     getElement().setAttribute("api-key", apiKey);
-    if (!StringUtils.isEmpty(clientId)) {
+    if (!isEmpty(clientId)) {
       getElement().setAttribute("client-id", clientId);
     }
-    if (!StringUtils.isEmpty(language)) {
+    if (!isEmpty(language)) {
       getElement().setAttribute("language", language);
     }
+  }
+
+  private static boolean isEmpty(final String s) {
+    return s == null || s.length() == 0;
   }
 
   @Synchronize("google-map-idle")
