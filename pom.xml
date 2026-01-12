@@ -135,7 +135,7 @@
         <dependency>
             <groupId>com.flowingcode.vaadin</groupId>
             <artifactId>json-migration-helper</artifactId>
-            <version>0.9.1</version>
+            <version>0.9.2</version>
         </dependency>
 
         <dependency>
