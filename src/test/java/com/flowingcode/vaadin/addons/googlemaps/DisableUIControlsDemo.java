@@ -43,6 +43,7 @@ public class DisableUIControlsDemo extends AbstractGoogleMapsDemo {
 
     FlexLayout layout = new FlexLayout();
     layout.setFlexWrap(FlexWrap.WRAP);
+    layout.getStyle().set("gap", "var(--lumo-space-s, var(--vaadin-gap-m))"); // hide-source
 
     Checkbox disableMapTypeControl =
         new Checkbox("Disable map type control", e -> gmaps.disableMapTypeControl(e.getValue()));

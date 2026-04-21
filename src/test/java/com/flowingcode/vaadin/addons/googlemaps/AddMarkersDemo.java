@@ -143,9 +143,7 @@ public class AddMarkersDemo extends AbstractGoogleMapsDemo {
 
     FlexLayout layout = new FlexLayout();
     layout.setFlexWrap(FlexWrap.WRAP); // hide-source
-    addMarker.addClassName("margin-button"); // hide-source
-    colorCB.addClassName("margin-button"); // hide-source
-    labelText.addClassName("margin-button"); // hide-source
+    layout.getStyle().set("gap", "var(--lumo-space-s, var(--vaadin-gap-m))"); // hide-source
     layout.add(colorCB, draggable, withRightClick, withLabel, labelText, addMarker);
     layout.setAlignItems(Alignment.BASELINE); // hide-source
     layout.getStyle().set("margin-top", "0"); // hide-source
