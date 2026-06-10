@@ -555,7 +555,56 @@
 				</dependency>
 			</dependencies>
 		</profile>
-		
+
+		<profile>
+			<id>dance</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-clean-plugin</artifactId>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>${project.basedir}</directory>
+									<includes>
+										<include>package.json</include>
+										<include>package-lock.json</include>
+										<include>tsconfig.json</include>
+										<include>tsconfig.json.*</include>
+										<include>types.d.ts</include>
+										<include>types.d.ts.*</include>
+										<include>vite.config.ts</include>
+										<include>vite.generated.ts</include>
+										<include>webpack.config.js</include>
+										<include>webpack.generated.js</include>
+									</includes>
+								</fileset>
+								<fileset>
+									<directory>${project.basedir}/frontend</directory>
+									<includes>
+										<include>index.html</include>
+									</includes>
+								</fileset>
+								<fileset>
+									<directory>${project.basedir}/frontend/generated</directory>
+								</fileset>
+								<fileset>
+									<directory>${project.basedir}/node_modules</directory>
+								</fileset>
+								<fileset>
+									<directory>${project.basedir}/src/main/bundles</directory>
+								</fileset>
+								<fileset>
+									<directory>${project.basedir}/src/main/dev-bundle</directory>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
     </profiles>
-    
+
 </project>
