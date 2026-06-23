@@ -336,6 +336,24 @@ public class GoogleMapMarker extends Component {
     private final double lat;
     private final double lon;
 
+    /**
+     * Creates a new event with the right click coordinates as separate lat/lon values.
+     *
+     * @param source the marker that was right clicked
+     * @param fromClient whether the event originated on the client side
+     * @param screenX the screen X coordinate of the click
+     * @param screenY the screen Y coordinate of the click
+     * @param clientX the client X coordinate of the click
+     * @param clientY the client Y coordinate of the click
+     * @param clickCount the click count
+     * @param button the mouse button
+     * @param ctrlKey whether Ctrl key was pressed
+     * @param shiftKey whether Shift key was pressed
+     * @param altKey whether Alt key was pressed
+     * @param metaKey whether Meta key was pressed
+     * @param lat the latitude of the click
+     * @param lon the longitude of the click
+     */
     public GoogleMapMarkerRightClickEvent(GoogleMapMarker source, boolean fromClient,
         @EventData("event.detail.domEvent.screenX") int screenX,
         @EventData("event.detail.domEvent.screenY") int screenY,
@@ -347,7 +365,47 @@ public class GoogleMapMarker extends Component {
         @EventData("event.detail.domEvent.shiftKey") boolean shiftKey,
         @EventData("event.detail.domEvent.altKey") boolean altKey,
         @EventData("event.detail.domEvent.metaKey") boolean metaKey,
-        @EventData(value = "event.detail.latLng") JsonValue latLng) {
+        @EventData("event.detail.latLng.lat()") double lat,
+        @EventData("event.detail.latLng.lng()") double lon) {
+      super(source, fromClient, screenX, screenY, clientX, clientY, clickCount, button, ctrlKey,
+          shiftKey, altKey, metaKey);
+      this.lat = lat;
+      this.lon = lon;
+    }
+
+    /**
+     * Creates a new event with the right click coordinates as a JSON value.
+     *
+     * @param source the marker that was right clicked
+     * @param fromClient whether the event originated on the client side
+     * @param screenX the screen X coordinate of the click
+     * @param screenY the screen Y coordinate of the click
+     * @param clientX the client X coordinate of the click
+     * @param clientY the client Y coordinate of the click
+     * @param clickCount the click count
+     * @param button the mouse button
+     * @param ctrlKey whether Ctrl key was pressed
+     * @param shiftKey whether Shift key was pressed
+     * @param altKey whether Alt key was pressed
+     * @param metaKey whether Meta key was pressed
+     * @param latLng a JSON object containing {@code lat} and {@code lng} properties
+     * @deprecated since 2.6.0, for removal. Use
+     *     {@link #GoogleMapMarkerRightClickEvent(GoogleMapMarker, boolean, int, int, int, int, int, int, boolean, boolean, boolean, boolean, double, double)}
+     *     instead.
+     */
+    @Deprecated
+    public GoogleMapMarkerRightClickEvent(GoogleMapMarker source, boolean fromClient,
+        @EventData("event.detail.domEvent.screenX") int screenX,
+        @EventData("event.detail.domEvent.screenY") int screenY,
+        @EventData("event.detail.domEvent.clientX") int clientX,
+        @EventData("event.detail.domEvent.clientY") int clientY,
+        @EventData("event.detail.domEvent.detail") int clickCount,
+        @EventData("event.detail.domEvent.button") int button,
+        @EventData("event.detail.domEvent.ctrlKey") boolean ctrlKey,
+        @EventData("event.detail.domEvent.shiftKey") boolean shiftKey,
+        @EventData("event.detail.domEvent.altKey") boolean altKey,
+        @EventData("event.detail.domEvent.metaKey") boolean metaKey,
+        JsonValue latLng) {
       super(source, fromClient, screenX, screenY, clientX, clientY, clickCount, button, ctrlKey,
           shiftKey, altKey, metaKey);
       this.lat = ((JsonObject) latLng).getNumber("lat");
