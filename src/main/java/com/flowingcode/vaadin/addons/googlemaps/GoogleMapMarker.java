@@ -299,8 +299,34 @@ public class GoogleMapMarker extends Component {
     private final double lat;
     private final double lon;
 
+    /**
+     * Creates a new event with the click coordinates as separate lat/lon values.
+     *
+     * @param source the marker that was clicked
+     * @param fromClient whether the event originated on the client side
+     * @param lat the latitude of the click
+     * @param lon the longitude of the click
+     */
     public GoogleMapMarkerClickEvent(GoogleMapMarker source, boolean fromClient,
-        @EventData(value = "event.detail.latLng") JsonValue latLng) {
+        @EventData("event.detail.latLng.lat()") double lat,
+        @EventData("event.detail.latLng.lng()") double lon) {
+      super(source);
+      this.lat = lat;
+      this.lon = lon;
+    }
+
+    /**
+     * Creates a new event with the click coordinates as a JSON value.
+     *
+     * @param source the marker that was clicked
+     * @param fromClient whether the event originated on the client side
+     * @param latLng a JSON object containing {@code lat} and {@code lng} properties
+     * @deprecated since 2.6.0, for removal. Use
+     *     {@link #GoogleMapMarkerClickEvent(GoogleMapMarker, boolean, double, double)} instead.
+     */
+    @Deprecated
+    public GoogleMapMarkerClickEvent(GoogleMapMarker source, boolean fromClient,
+        JsonValue latLng) {
       super(source);
       this.lat = ((JsonObject) latLng).getNumber("lat");
       this.lon = ((JsonObject) latLng).getNumber("lng");
