@@ -20,6 +20,7 @@
 
         <jetty.version>9.4.36.v20210114</jetty.version>
         <flowingcode.commons.demo.version>3.9.0</flowingcode.commons.demo.version>
+        <lombok.version>1.18.40</lombok.version>
     </properties>
 	
     <organization>
@@ -95,7 +96,7 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
-			<version>1.18.34</version>
+			<version>${lombok.version}</version>
 		</dependency>
 		
         <dependency>
@@ -173,6 +174,20 @@
     <build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.13.0</version>
+					<configuration>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>${lombok.version}</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
