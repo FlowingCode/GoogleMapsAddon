@@ -20,7 +20,7 @@
 
         <jetty.version>9.4.36.v20210114</jetty.version>
         <flowingcode.commons.demo.version>3.9.0</flowingcode.commons.demo.version>
-        <lombok.version>1.18.40</lombok.version>
+        <lombok.version>1.18.46</lombok.version>
     </properties>
 	
     <organization>
