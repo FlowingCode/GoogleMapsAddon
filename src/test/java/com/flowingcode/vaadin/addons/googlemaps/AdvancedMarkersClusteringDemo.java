@@ -1,0 +1,69 @@
+/*-
+ * #%L
+ * Google Maps Addon
+ * %%
+ * Copyright (C) 2020 - 2026 Flowing Code
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+package com.flowingcode.vaadin.addons.googlemaps;
+
+import com.flowingcode.vaadin.addons.demo.DemoSource;
+import com.flowingcode.vaadin.addons.googlemaps.GoogleMap.MapType;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+
+@PageTitle("Advanced Markers Clustering Demo")
+@DemoSource
+@Route(value = "googlemaps/advancedmarkersclustering", layout = GooglemapsDemoView.class)
+@SuppressWarnings("serial")
+public class AdvancedMarkersClusteringDemo extends AbstractGoogleMapsDemo {
+
+  @Override
+  protected void createGoogleMapsDemo(String apiKey) {
+    GoogleMap gmaps = new GoogleMap(apiKey, null, null);
+    gmaps.setMapType(MapType.ROADMAP);
+    gmaps.setSizeFull();
+    gmaps.setZoom(5);
+    gmaps.setCenter(new LatLon(-31.636036, -60.7055271));
+    // Advanced markers require a Map ID. "DEMO_MAP_ID" can be used for testing; use your own Map ID
+    // in production.
+    gmaps.setMapId("DEMO_MAP_ID");
+
+    gmaps.addMarker(createMarker("Marker 1", new LatLon(-31.646036, -60.7055290), true, "#F06292"));
+    gmaps.addMarker(createMarker("Marker 2", new LatLon(-31.562346, -60.6176364), true, "#F06292"));
+    gmaps.addMarker(createMarker("Marker 3", new LatLon(-31.531917, -60.8456027), true, "#F06292"));
+    gmaps.addMarker(createMarker("Marker 4", new LatLon(-31.651667, -60.9555557), true, "#F06292"));
+
+    gmaps.addMarker(createMarker("Marker 5", new LatLon(-30.997815, -65.60542944), false, "#4285F4"));
+    gmaps.addMarker(createMarker("Marker 6", new LatLon(-31.298693, -66.50630836), false, "#4285F4"));
+    gmaps.addMarker(createMarker("Marker 7", new LatLon(-31.878914, -66.28658178), false, "#4285F4"));
+
+    gmaps.addMarker(createMarker("Marker 8", new LatLon(-33.138889, -65.95699194), false, "#34A853"));
+    gmaps.addMarker(createMarker("Marker 9", new LatLon(-33.322683, -65.12203100), false, "#34A853"));
+    gmaps.addMarker(createMarker("Marker 10", new LatLon(-33.652538, -65.737265381), false, "#34A853"));
+
+    gmaps.enableMarkersClustering();
+
+    add(gmaps);
+  }
+
+  private GoogleMapAdvancedMarker createMarker(String caption, LatLon position, boolean draggable,
+      String color) {
+    GoogleMapAdvancedMarker marker = new GoogleMapAdvancedMarker(caption, position, draggable);
+    marker.setPinBackground(color);
+    return marker;
+  }
+
+}
