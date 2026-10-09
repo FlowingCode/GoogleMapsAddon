@@ -51,7 +51,7 @@ import lombok.experimental.ExtensionMethod;
 @SuppressWarnings("serial")
 @Tag("google-map")
 @JsModule("@flowingcode/google-map/google-map.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.9.0")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.10.1")
 @NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
 @JsModule("./googlemaps/geolocation.js")
 @ExtensionMethod(value = JsonMigration.class, suppressBaseMethods = true)
