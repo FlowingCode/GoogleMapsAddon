@@ -41,7 +41,7 @@ import lombok.experimental.ExtensionMethod;
 @Tag("google-map-poly")
 @JsModule("@flowingcode/google-map/google-map-poly.js")
 @JsModule("@flowingcode/google-map/google-map-point.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.9.0")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.10.1")
 @NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
 @ExtensionMethod(value = JsonMigration.class, suppressBaseMethods = true)
 public abstract class GoogleMapPoly extends Component {
