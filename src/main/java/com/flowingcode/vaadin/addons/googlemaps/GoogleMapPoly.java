@@ -42,7 +42,7 @@ import lombok.experimental.ExtensionMethod;
 @JsModule("@flowingcode/google-map/google-map-poly.js")
 @JsModule("@flowingcode/google-map/google-map-point.js")
 @NpmPackage(value = "@flowingcode/google-map", version = "3.10.1")
-@NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
+@NpmPackage(value = "@googlemaps/markerclusterer", version = "2.6.2")
 @ExtensionMethod(value = JsonMigration.class, suppressBaseMethods = true)
 public abstract class GoogleMapPoly extends Component {
 
