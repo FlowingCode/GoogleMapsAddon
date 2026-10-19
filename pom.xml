@@ -559,7 +559,7 @@
 				<maven.compiler.target>21</maven.compiler.target>
 				<vaadin.version>25.0.0</vaadin.version>
 				<jetty.version>11.0.26</jetty.version>
-				<flowingcode.commons.demo.version>5.2.0</flowingcode.commons.demo.version>
+				<flowingcode.commons.demo.version>5.5.0</flowingcode.commons.demo.version>
 			</properties>
 			<dependencies>
 
