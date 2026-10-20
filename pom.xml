@@ -329,7 +329,7 @@
 							<doclint>none</doclint>
                             <failOnWarnings>true</failOnWarnings>
                             <links>
-                                <link>https://javadoc.io/doc/com.vaadin/vaadin-platform-javadoc/${vaadin.version}</link>
+                                <link>https://javadoc.flowingcode.com/artifact/com.vaadin/vaadin-platform-javadoc/${vaadin.version}</link>
                             </links>
                         </configuration>
                     </plugin>
