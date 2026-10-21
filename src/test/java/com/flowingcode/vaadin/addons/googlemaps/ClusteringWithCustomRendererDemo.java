@@ -28,7 +28,7 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Clustering With Custom Renderer Demo")
 @DemoSource
 @DemoSource(
-    value = "/src/test/resources/META-INF/resources/frontend/src/clustering-custom-renderer-example.js",
+    value = "/src/test/resources/META-INF/frontend/src/clustering-custom-renderer-example.js",
     caption = "clustering-custom-renderer-example.js")
 @Route(value = "googlemaps/clustering-custom-renderer", layout = GooglemapsDemoView.class)
 @JsModule("./src/clustering-custom-renderer-example.js")
@@ -64,7 +64,7 @@ public class ClusteringWithCustomRendererDemo extends AbstractGoogleMapsDemo {
     
     /*
      * set custom renderer for clustering (see
-     * /google-maps/src/test/resources/META-INF/resources/frontend/src/clustering-custom-renderer-
+     * /google-maps/src/test/resources/META-INF/frontend/src/clustering-custom-renderer-
      * example.js for definition)
      */
     gmaps.setClusteringRenderer("customRenderer");

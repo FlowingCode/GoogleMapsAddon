@@ -32,7 +32,7 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Geolocation Demo")
 @DemoSource
 @DemoSource(
-    value = "/src/test/resources/META-INF/resources/frontend/styles/google-maps/geolocation-demo-styles.css",
+    value = "/src/test/resources/META-INF/frontend/styles/google-maps/geolocation-demo-styles.css",
     caption = "geolocation-demo-styles.css")
 @Route(value = "googlemaps/geolocation", layout = GooglemapsDemoView.class)
 @CssImport("./styles/google-maps/geolocation-demo-styles.css")

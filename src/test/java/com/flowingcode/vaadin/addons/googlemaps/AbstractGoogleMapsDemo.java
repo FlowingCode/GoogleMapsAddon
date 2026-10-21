@@ -25,7 +25,7 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 @SuppressWarnings("serial")
-@StyleSheet("context://frontend/styles/google-maps/demo-styles.css")
+@StyleSheet("context://styles/google-maps/demo-styles.css")
 public abstract class AbstractGoogleMapsDemo extends VerticalLayout {
 
   public AbstractGoogleMapsDemo() {

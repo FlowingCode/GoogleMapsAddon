@@ -31,7 +31,7 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Custom Controls Demo")
 @DemoSource
 @DemoSource(
-    value = "/src/test/resources/META-INF/resources/frontend/styles/google-maps/custom-controls-demo-styles.css",
+    value = "/src/test/resources/META-INF/frontend/styles/google-maps/custom-controls-demo-styles.css",
     caption = "custom-controls-demo-styles.css")
 @Route(value = "googlemaps/custom-controls", layout = GooglemapsDemoView.class)
 @CssImport("./styles/google-maps/custom-controls-demo-styles.css")
