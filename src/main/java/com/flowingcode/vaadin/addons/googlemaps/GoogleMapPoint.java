@@ -28,8 +28,8 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 @SuppressWarnings("serial")
 @Tag("google-map-point")
 @JsModule("@flowingcode/google-map/google-map-point.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.9.0")
-@NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.10.1")
+@NpmPackage(value = "@googlemaps/markerclusterer", version = "2.6.2")
 public class GoogleMapPoint extends Component {
 
   public GoogleMapPoint(LatLon latlon) {

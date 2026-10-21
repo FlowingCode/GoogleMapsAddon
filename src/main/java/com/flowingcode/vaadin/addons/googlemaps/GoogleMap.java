@@ -51,8 +51,8 @@ import lombok.experimental.ExtensionMethod;
 @SuppressWarnings("serial")
 @Tag("google-map")
 @JsModule("@flowingcode/google-map/google-map.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.9.0")
-@NpmPackage(value = "@googlemaps/markerclusterer", version = "2.0.8")
+@NpmPackage(value = "@flowingcode/google-map", version = "3.10.1")
+@NpmPackage(value = "@googlemaps/markerclusterer", version = "2.6.2")
 @JsModule("./googlemaps/geolocation.js")
 @ExtensionMethod(value = JsonMigration.class, suppressBaseMethods = true)
 public class GoogleMap extends Component implements HasSize {
@@ -265,6 +265,38 @@ public class GoogleMap extends Component implements HasSize {
 
   @SuppressWarnings("squid:S3242")
   public void removeMarker(GoogleMapMarker marker) {
+    getElement().removeChild(marker.getElement());
+    // markers need to be updated on removal
+    getElement().executeJs("this._updateMarkers()");
+  }
+
+  /**
+   * Adds an advanced marker to the map. Advanced markers require the map to have a Map ID (see
+   * {@link #setMapId(String)}), set before the map is shown.
+   *
+   * @param marker The marker to add.
+   * @throws IllegalStateException if the map is already shown and has no Map ID
+   * @since 2.7.0
+   */
+  public void addMarker(GoogleMapAdvancedMarker marker) {
+    if (isAttached()) {
+      // checked before adding the marker, so that it isn't left in the map on failure
+      GoogleMapAdvancedMarker.checkMapId(this);
+    }
+    getElement().appendChild(marker.getElement());
+    if (getElement().getParent() != null) {
+      getElement().executeJs("this._updateMarkers()");
+    }
+  }
+
+  /**
+   * Removes an advanced marker from the map.
+   *
+   * @param marker The marker to remove.
+   * @since 2.7.0
+   */
+  @SuppressWarnings("squid:S3242")
+  public void removeMarker(GoogleMapAdvancedMarker marker) {
     getElement().removeChild(marker.getElement());
     // markers need to be updated on removal
     getElement().executeJs("this._updateMarkers()");
