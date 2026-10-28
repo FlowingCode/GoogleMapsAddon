@@ -31,7 +31,6 @@ import com.vaadin.flow.component.EventData;
 import com.vaadin.flow.component.Synchronize;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.shared.Registration;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
@@ -41,8 +40,6 @@ import lombok.experimental.ExtensionMethod;
 @SuppressWarnings("serial")
 @Tag("google-map-marker")
 @JsModule("@flowingcode/google-map/google-map-marker.js")
-@NpmPackage(value = "@flowingcode/google-map", version = "3.10.1")
-@NpmPackage(value = "@googlemaps/markerclusterer", version = "2.6.2")
 @ExtensionMethod(value = JsonMigration.class, suppressBaseMethods = true)
 public class GoogleMapMarker extends Component {
 
